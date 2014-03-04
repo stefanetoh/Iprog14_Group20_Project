@@ -1,0 +1,47 @@
+#divider{
+  	height: 1px;
+  	background-color: #e5e5e5;
+	width: 100%;
+}
+
+.period{
+	border-width: 0.2em;
+	border-color: black;
+	border-style: solid;
+	padding: 0.4em;
+	margin-right: 1em;
+	height: 100px;
+}
+
+.bottom{
+    position: absolute;
+    bottom: 0px;
+    right: 5px;
+}
+
+#info{
+	border-width: 0.2em;
+	border-color: black;
+	border-style: solid;
+	padding: 0.4em;
+}
+
+#courses{
+	padding: 0.5em;
+}
+
+#coursesummary{
+	background-color: #3CBC3C;
+	padding: 0.5em;
+	margin-right: 1em;
+}
+
+#coursesummary ul{
+	list-style: none;
+}
+
+#csn{
+	color:#FFFFFF;
+	background-color: #D70000;
+	padding: 0.5em;
+}
