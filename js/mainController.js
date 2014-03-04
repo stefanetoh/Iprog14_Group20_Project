@@ -3,16 +3,11 @@ app.controller("MainController", function($scope){
 	$scope.inputValue = "";
 	$scope.selectedCourse = "DM1021";
 
-	$.getJSON("../data/DM.json", function( data )) {
-		var items = [];
-		$.each(data, function(key,val){
-			items.push(key+val);
+	
 
-		});
-	};
-	consol.log(items);
+	//$scope.courses = items;//
 
-	$scope.courses = items;//[
+	//[
 
 
 	// {

@@ -1,6 +1,7 @@
 {
     "department": "CSC/Media Technology and Graphic Arts",
-    "courses": [
+    "courses": 
+    [
             {
             "code": "DM3510",
             "title": "Current Topics in Technology-Enhanced Learning",
@@ -874,4 +875,4 @@
             "level": "Second cycle"
         }
     ]
-}
+};
