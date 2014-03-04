@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 <head>
 	<title>My Academic Year</title>
 	<!-- Bootstrap CSS -->
@@ -6,21 +7,49 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+	<!-- 
+	*************************************************************************************************************
 
+	WE JUST ADD A ng-controller TO THE DIVS BELOW. YOU CAN HAVE DIFFERENT CONTROLLERS ON DIFFERENT DIVS
+	WITH DIFFERENT ng-model! 
+
+	The $scope is called a Veiw-Model and is passed in, for example, MainController.js
+	
+	*************************************************************************************************************
+	-->
 	<div class="container" id='content' ng-app='MyApp' ng-controller='MainController'>		
+		<!-- By: Calle & Anna 2014-03-04 -->
 		
+		<div class="header">
+			<h1>Media Technology Course Planner</h1>
+			<hr id="divider">
+		</div>
+
 		{{whatever}}
 		
 		<input type='text' ng-model='inputValue' />
 		{{inputValue}}
 
 		<select ng-model='selectedCourse' ng-options='obj.code for obj in courses'></select>
-		{{selectedCourse.credits}}
-		
+		<p>
+			<p>{{selectedCourse.title}}</p>
+			<p>{{selectedCourse.credits}}</p>
+			<p>{{selectedCourse.href}}</p>
+			{{selectedCourse.info}}
+			<p>{{selectedCourse.level}}</p>
+		</p>
+
+		<h2>Search for courses</h2><input type='text' ng-model='searchText' />
+        
+        <p ng-repeat="course in courses | filter:searchText | orderBy:'level'">{{course.code}} - {{course.title}} - {{course.credits}} - {{course.level}}</p>
+        <input type='text' ng-model='newCourse' />
+        <button ng-click='addNew()'>Add</button>
+        
 	</div>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
+
     <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <!-- AngularJS -->
