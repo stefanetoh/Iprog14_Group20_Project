@@ -33,15 +33,19 @@
 #coursesummary{
 	background-color: #3CBC3C;
 	padding: 0.5em;
+	margin-top: 1em;
 	margin-right: 1em;
 }
 
 #coursesummary ul{
 	list-style: none;
+	
 }
 
 #csn{
 	color:#FFFFFF;
 	background-color: #D70000;
 	padding: 0.5em;
+	margin-top: 1em;
+	margin-right: 1em;
 }
