@@ -11,7 +11,7 @@ app.config(['$routeProvider',
 			controller: 'MainController'
 		}).
 		when('/partials/:code', {
-			templateUrl: 'partials/view2.html',
+			templateUrl: 'partials/welcomeView.html',
 			controller: 'Controller2'
 		}).
 		otherwise({
