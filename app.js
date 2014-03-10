@@ -6,11 +6,11 @@ var app = angular.module('MyApp', [
 app.config(['$routeProvider',
   function($routeProvider) {
 		$routeProvider.
-		when('/partials', {
+		when('/partials/:selectedMaster', {
 			templateUrl: 'partials/mainView.html',
 			controller: 'MainController'
 		}).
-		when('/partials/:code', {
+		when('/partials', {
 			templateUrl: 'partials/welcomeView.html',
 			controller: 'Controller2'
 		}).

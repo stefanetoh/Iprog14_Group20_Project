@@ -6,7 +6,7 @@
 			<hr id="divider">
 		</div>
 
-		{{whatever}}
+		{{selectedMaster.id}}
 		
 		<input type='text' ng-model='inputValue' />
 		{{inputValue}}
@@ -95,11 +95,13 @@
 							<th>Period</th>
 						</tr>
 			        	<tr ng-repeat="course in courses | filter:searchText"><td>{{course.code}}</td><td>{{course.title}}</td><td>{{course.credits}}</td><td>{{course.level}}</td></tr>
-					</table> 
+					</table>
 
-					<input type='text' ng-model='newCourse' />
+					<!--
+<input type='text' ng-model='newCourse' />
 		        	<button ng-click='addNew()'>Add</button>
-
+-->
+		        	
 					</div>
 				</div>
 		</div>
