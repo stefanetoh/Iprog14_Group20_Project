@@ -1,52 +1,46 @@
 // Implement this controllers object when we want to pass several controllers!
 //var controllers = {};
-app.controller("MainController", function($scope){
+
+/*The data model (a simple array of courses in object literal notation) 
+is now instantiated within the mainController controller. 
+The controller is simply a constructor function that takes a $scope parameter. */
+
+app.controller("MainController", function($scope) {
 	$scope.whatever = "whatever bro";
 	$scope.inputValue = "";
 	$scope.selectedCourse = "DM1021";
 
 	$scope.courses = [];
-/*
-	$scope.courses = [
-            {
-            "code": "DM3510",
-            "title": "Current Topics in Technology-Enhanced Learning",
-            "href": "http://www.kth.se/student/kurser/kurs/DM3510?l=en",
-            "info": "",
-            "credits": "7.5",
-            "level": "Third cycle"
-        }
-    ];
-*/
-    //URL for the Media Technology track
-/*
-	var url = 'http://www.kth.se/api/kopps/v1/programme/TMETM/academic-year-plan/2013:2/1';
-	
-	$.ajax({
-		type: 'GET',
-	    url: url,
-		dataType: 'xml', 
-	    error: function(e) {
-	       console.log(e.message);
-	    },
-	    success: function(xml) {
-	    	var academicYearPlan = $(this).find('academicYearPlan').text();
-	    	console.log(academicYearPlan);
-		}
-	});
-*/
-	$().ready(function () {
+
+	$().ready(function() {
 		var url = 'http://www.kth.se/api/kopps/v1/programme/TMETM/academic-year-plan/2013:2/1&callback=?';
 
-		$.get(url, function (data) {
+		$.get(url, function(data) {
 			alert(data);
 			alert(url);
 			// can use 'data' in here...
 		});
 	});
 
-	
+
 });
 
 
 
+/*FRÅN ANGULAR_TUTORIAL: 
+
+var phonecatControllers = angular.module('phonecatControllers', []);
+ 
+phonecatControllers.controller('PhoneListCtrl', ['$scope', '$http',
+  function ($scope, $http) {
+    $http.get('phones/phones.json').success(function(data) {
+      $scope.phones = data;
+    });
+ 
+    $scope.orderProp = 'age';
+  }]);
+ 
+phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams',
+  function($scope, $routeParams) {
+    $scope.phoneId = $routeParams.phoneId;
+  }]); */

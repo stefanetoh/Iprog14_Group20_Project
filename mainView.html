@@ -1,0 +1,112 @@
+<div class="container" id='content' ng-app='MyApp' ng-controller='MainController'>		
+		<!-- By: Calle & Anna 2014-03-04 -->
+		
+		<div class="header">
+			<h1>Media Technology Course Planner</h1>
+			<hr id="divider">
+		</div>
+
+		{{whatever}}
+		
+		<input type='text' ng-model='inputValue' />
+		{{inputValue}}
+        
+	<div class="row">
+
+		<div class="col-md-8" id="left">
+
+
+			<div class="row">
+				<div class="col-md-5">
+					<h3>Period 1</h3>
+				</div>
+				<div class="col-md-5">
+					<h3>Period 2</h3>
+				</div>
+			</div>
+
+
+	        <div class="row">
+				<div class="col-md-5 period" id="period1">
+					<p class="bottom">Credits: </p>
+				</div>
+				
+				<div class="col-md-5 period" id="period2">
+					<p class="bottom">Credits: </p>
+				</div>
+			</div>
+			
+			
+			
+			<div class="row">
+				<div class="col-md-5">
+					<h3>Period 3</h3>
+				</div>
+				<div class="col-md-5">
+					<h3>Period 4</h3>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-5 period" id="period3">
+					<p class="bottom">Credits: </p>
+				</div>
+				
+				<div class="col-md-5 period" id="period4">
+					<p class="bottom">Credits: </p>
+				</div>
+
+			</div>
+
+			<div class="row">
+					<div class="col-md-5" id="coursesummary">
+							<p><strong>Total credits: </strong></p>
+							<p><strong>Advanced credits: </strong></p>
+							<p><strong>Credits from your track: </strong></p>
+					</div>
+				
+					<div class="col-md-5" id="csn">
+						<h3>CSN disapproves. Keep on editing.</h3>
+					</div>
+			</div>
+		</div>
+
+		<div class="col-md-4" id="right">
+			<!--//////////////////////////// FLYTTA NEDAN //////////////////////////////-->
+				<div class="row">
+					<div class="col-md-6  bg-info text-info" id="info">
+					<span class="glyphicon glyphicon-info-sign"></span>
+					<p>Drag and drop the courses you would like to take into their respective period to create your academic year.</p>
+				</div>
+					<div class="col-md-12" id="courses">
+					<input type='text' ng-model='searchText' placeholder='Search...' />
+						<select>
+					 		<option value="" disabled selected>Select master</option>
+						 	<option value="interactive">Interactive Media Technology</option>
+						 	<option value="hci">Human Computer Interaction</option>
+						 	<option value="mediamanagement">Media Management</option>
+						</select>
+					
+					<table class="table">
+						<tr>
+							<th>Course name</th>
+							<th>Credits</th>
+							<th>Level</th>
+							<th>Period</th>
+						</tr>
+			        	<tr ng-repeat="course in courses | filter:searchText"><td>{{course.code}}</td><td>{{course.title}}</td><td>{{course.credits}}</td><td>{{course.level}}</td></tr>
+					</table> 
+
+					<input type='text' ng-model='newCourse' />
+		        	<button ng-click='addNew()'>Add</button>
+		        	<a  href="#/partials/{{course.code}}"> TEST </a>
+
+					</div>
+				</div>
+		</div>
+				<!-- //////////////////////////// FLYTTA OVAN /////////////////////////////// -->
+		
+
+	</div>
+		<!-- HÄR SLUTAR CONTAINER-->
+</div>
