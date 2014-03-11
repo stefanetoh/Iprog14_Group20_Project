@@ -1,5 +1,5 @@
-<!-- By Stefan Etoh, 2014-02-11 -->
 <?php
+// By Stefan Etoh, 2014-02-11 
 $programmes = array("TMETM", "THCIM");
 $course_list_all = array();
 
@@ -65,7 +65,7 @@ foreach($programmes as $programme){
 								
 			}
 			//create "json-object"-compatible array for the Specialisation courses 
-			$specialisation_object = array("$specialisation_code" => $specialisation_list);
+			$specialisation_object = array("trackCode"=>"$specialisation_code","trackCourses" => $specialisation_list);
 			array_push($specialisation_list_all, $specialisation_object);
 			
 		}
@@ -98,8 +98,16 @@ foreach($programmes as $programme){
 	}
 	//create "json-object"-compatible array, each programme containing the different course_object_lists
 	//json-structure Programme->Mandatory, Specialisation(s), Conditional
-	$course_list = array($mandatory_object_list, $specialisation_object_list, $conditional_object_list);
-	$programme_object = array($programme => $course_list);
+	//$test = array("Title" => "Test");
+	//$course_list = array($mandatory_object_list, $specialisation_object_list, $conditional_object_list);
+	
+	if($programme == "TMETM"){
+		$programme = "Media Technology";
+	}
+	elseif($programme == "THCIM"){
+		$programme = "Human Computer Interaction";
+	}
+	$programme_object = array("title"=>"$programme", "mandatory" => $mandatory_list, "specialisation" =>$specialisation_list_all, "conditional"=>$conditional_list);
 	array_push($course_list_all, $programme_object);
 }
 

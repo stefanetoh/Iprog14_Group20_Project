@@ -81,10 +81,19 @@
 					<!-- By: Calle and Anna 2014-03-10 -->
 					<div class="col-md-12" id="courses">
 					<input type='text' ng-model='searchText' placeholder='Search...' />
+<!--
 						<select ng-model="selectedMaster" ng-init="selectedMaster=masters[{{selectedMaster.id}}-1]" ng-options="obj.name for obj in masters">
 
 						</select>
-						<select ng-model='selectedTrack' ng-init="selectedTrack=selectedTrack.title" ng-options='obj.title for obj in masters[selectedMaster.id-1].tracks'></select>
+-->
+						
+						<select ng-model='selectedMaster'  ng-init="selectedMaster=masters[masters.indexOf(selectedMaster)]" ng-options='obj.title for obj in masters'></select>
+
+						
+<!-- 						<select ng-model='selectedTrack' ng-init="selectedTrack=selectedTrack.title" ng-options='obj.title for obj in masters[selectedMaster.id-1].tracks'></select> -->
+						
+						<select ng-model='selectedTrack' ng-options='obj.trackCode for obj in masters[masters.indexOf(selectedMaster)].specialisation'></select>
+
 
 						<!-- we populate the drop down with the current tracks. -->
 
