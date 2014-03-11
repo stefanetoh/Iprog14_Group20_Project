@@ -84,7 +84,7 @@
 						<select ng-model="selectedMaster" ng-init="selectedMaster=masters[{{selectedMaster.id}}-1]" ng-options="obj.name for obj in masters">
 
 						</select>
-						<select ng-model='selectedTrack' ng-init="selectedTrack={{selectedTrack.title}}" ng-options='obj.title for obj in masters[selectedMaster.id-1].tracks'></select>
+						<select ng-model='selectedTrack' ng-init="selectedTrack=selectedTrack.title" ng-options='obj.title for obj in masters[selectedMaster.id-1].tracks'></select>
 
 						<!-- we populate the drop down with the current tracks. -->
 
@@ -97,8 +97,9 @@
 							<th>Level</th>
 							<th>Period</th>
 						</tr>
-						{{masters[selectedMaster.id].mandatoryCourses[0].code}}
+					
 			        	<tr ng-repeat="label in masters[selectedMaster.id-1].mandatoryCourses | filter:searchText"><td>{{label.title}}</td><td>{{label.credits}}</td><td>{{label.level}}</td><td>{{label.period}}</td></tr>
+			        	<tr ng-repeat="label in selectedTrack.trackCourses | filter:searchText"><td>{{label.title}}</td><td>{{label.credits}}</td><td>{{label.level}}</td><td>{{label.period}}</td></tr>
 
 			        	
 					</table>

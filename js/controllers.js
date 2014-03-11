@@ -118,9 +118,15 @@ myAcademicControllers.controller('MainController', ['$scope', '$http', '$routePa
 				code: "THCIM",
 				tracks: [{
 					trackCode: "",
-					title: "",
-					trackCourses: []
-				}],
+					title: "General track",
+					trackCourses: [{
+						code: "DH2320",
+						title: "Introduction to Visualization and Computer Graphics",
+						level: "second cycle",
+						period: 1,
+						credits: 6.0
+						}]
+					}],
 				mandatoryCourses: [{
 					code: "DH2610",
 					title: "Theory and methodology for HCI",
@@ -128,13 +134,6 @@ myAcademicControllers.controller('MainController', ['$scope', '$http', '$routePa
 					period: 1,
 					credits: 7.5
 				}],
-				conditionalCourses: [{
-					code: "DH2320",
-					title: "Introduction to Visualization and Computer Graphics",
-					level: "second cycle",
-					period: 1,
-					credits: 6.0
-				}]
 		}
 	];
 
