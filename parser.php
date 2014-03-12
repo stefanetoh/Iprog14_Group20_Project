@@ -10,17 +10,11 @@ foreach($programmes as $programme){
 	//Set variable names to the different xml elements
 	$mandatory = $xml_url->common->mandatory;
 	$specialisation = $xml_url->specialisation;
-	$conditional = $xml_url->common->conditional;
-	
-	//list of objects that will store the courses 
-	$mandatory_object_list = array();
-	$specialisation_object_list = array();
-	$conditional_object_list = array();
-	
-	
+	$conditional = $xml_url->common->conditional;	
+
 	//if the track contains any mandatory courses	
 	if(isset($mandatory)){		
-		$mandatory_list = array();
+		$mandatory_courses = array();
 		
 		//loop the mandatory courses
 		foreach($mandatory->courseRound as $course){	
@@ -32,19 +26,15 @@ foreach($programmes as $programme){
 			
 			//create course-objects
 			$course = createCourseObject("$course_code", "$start_term", "$round_id");
-			array_push($mandatory_list, $course);
+			array_push($mandatory_courses, $course);
 			
 		}
-		//create "json-object"-compatible array for the Mandatory courses 
-		$mandatory_object = array("Mandatory" => $mandatory_list);
-		array_push($mandatory_object_list, $mandatory_object);
-
 	}
 
 
 	//if the track contains any specialisations
 	if(isset($specialisation)){
-		$specialisation_list_all = array();
+		$specialisation_courses = array();
 		
 		//loop the specialisations
 		foreach($specialisation as $specialisation){
@@ -64,19 +54,18 @@ foreach($programmes as $programme){
 				array_push($specialisation_list, $course);
 								
 			}
+			
 			//create "json-object"-compatible array for the Specialisation courses 
 			$specialisation_object = array("trackCode"=>"$specialisation_code","trackCourses" => $specialisation_list);
-			array_push($specialisation_list_all, $specialisation_object);
+			array_push($specialisation_courses, $specialisation_object);
 			
 		}
-		
-		array_push($specialisation_object_list, $specialisation_list_all);
 	}
 	
 	
 	//if the track contains any conditional courses
 	if(isset($conditional)){
-		$conditional_list = array();
+		$conditional_courses = array();
 		
 		//loop the conditional courses
 		foreach($conditional->courseRound as $course){	
@@ -88,26 +77,23 @@ foreach($programmes as $programme){
 			
 			//create course-objects
 			$course = createCourseObject("$course_code", "$start_term", "$round_id");
-			array_push($conditional_list, $course);
+			array_push($conditional_courses, $course);
 			
 		}
-		//create "json-object"-compatible array for the Conditional courses 
-		$conditional_object = array("Conditional" => $conditional_list);
-		array_push($conditional_object_list, $conditional_object);
-		
+
 	}
-	//create "json-object"-compatible array, each programme containing the different course_object_lists
-	//json-structure Programme->Mandatory, Specialisation(s), Conditional
-	//$test = array("Title" => "Test");
-	//$course_list = array($mandatory_object_list, $specialisation_object_list, $conditional_object_list);
 	
+	
+	//Full programme title not available on the XML-pages so this will do for now
 	if($programme == "TMETM"){
 		$programme = "Media Technology";
 	}
 	elseif($programme == "THCIM"){
 		$programme = "Human Computer Interaction";
 	}
-	$programme_object = array("title"=>"$programme", "mandatory" => $mandatory_list, "specialisation" =>$specialisation_list_all, "conditional"=>$conditional_list);
+	
+	//Create programme objects with the corresponding courses
+	$programme_object = array("title"=>"$programme", "mandatory" => $mandatory_courses, "specialisation" =>$specialisation_courses, "conditional"=>$conditional_courses);
 	array_push($course_list_all, $programme_object);
 }
 
