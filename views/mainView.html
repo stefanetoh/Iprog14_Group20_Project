@@ -8,124 +8,110 @@
 
 		{{selectedMaster.id}}
 		
+<!--
 		<input type='text' ng-model='inputValue' />
 		{{inputValue}}
+-->
         
-	<div class="row">
-
 		<div class="col-md-8" id="left">
 
-
-			<div class="row">
-				<div class="col-md-5">
-					<h3>Period 1</h3>
-				</div>
-				<div class="col-md-5">
-					<h3>Period 2</h3>
-				</div>
+			<div class="col-md-5">
+				<h3>Period 1</h3>
+			</div>
+			<div class="col-md-5">
+				<h3>Period 2</h3>
 			</div>
 
 
-	        <div class="row">
-				<div class="col-md-5 period" id="period1">
-					<p class="bottom">Credits: </p>
-				</div>
-				
-				<div class="col-md-5 period" id="period2">
-					<p class="bottom">Credits: </p>
-				</div>
+			<div class="col-md-5 period" id="period1">
+				<p class="bottom">Credits: </p>
 			</div>
 			
+			<div class="col-md-5 period" id="period2">
+				<p class="bottom">Credits: </p>
+			</div>
+	
 			
-			
-			<div class="row">
-				<div class="col-md-5">
-					<h3>Period 3</h3>
-				</div>
-				<div class="col-md-5">
-					<h3>Period 4</h3>
-				</div>
+			<div class="col-md-5">
+				<h3>Period 3</h3>
+			</div>
+			<div class="col-md-5">
+				<h3>Period 4</h3>
 			</div>
 
-			<div class="row">
-				<div class="col-md-5 period" id="period3">
-					<p class="bottom">Credits: </p>
-				</div>
-				
-				<div class="col-md-5 period" id="period4">
-					<p class="bottom">Credits: </p>
-				</div>
-
+			<div class="col-md-5 period" id="period3">
+				<p class="bottom">Credits: </p>
+			</div>
+			
+			<div class="col-md-5 period" id="period4">
+				<p class="bottom">Credits: </p>
 			</div>
 
-			<div class="row">
-					<div class="col-md-5" id="coursesummary">
-							<p><strong>Total credits: </strong></p>
-							<p><strong>Advanced credits: </strong></p>
-							<p><strong>Credits from your track: </strong></p>
-					</div>
-				
-					<div class="col-md-5" id="csn">
-						<h3>CSN disapproves. Keep on editing.</h3>
-					</div>
+			<div class="col-md-5" id="coursesummary">
+					<p><strong>Total credits: </strong></p>
+					<p><strong>Advanced credits: </strong></p>
+					<p><strong>Credits from your track: </strong></p>
+			</div>
+		
+			<div class="col-md-5" id="csn">
+				<h3>CSN disapproves. Keep on editing.</h3>
 			</div>
 		</div>
 
 		<div class="col-md-4" id="right">
-				<div class="row">
-					<div class="col-md-6  bg-info text-info" id="info">
-					<span class="glyphicon glyphicon-info-sign"></span>
-					<p>Drag and drop the courses you would like to take into their respective period to create your academic year.</p>
-				</div>
+			<div class="col-md-12  bg-info text-info" id="info">
+				<span class="glyphicon glyphicon-info-sign"></span>
+				<p>Drag and drop the courses you would like to take into their respective period to create your academic year.</p>
+			</div>
 					
-					<!-- By: Calle and Anna 2014-03-10 -->
-					<div class="col-md-12" id="courses">
-					<input type='text' ng-model='searchText' placeholder='Search...' />
-<!--
-						<select ng-model="selectedMaster" ng-init="selectedMaster=masters[{{selectedMaster.id}}-1]" ng-options="obj.name for obj in masters">
-
-						</select>
--->
-						
-						<select ng-model='selectedMaster'  ng-init="selectedMaster=masters[masters.indexOf(selectedMaster)]" ng-options='obj.title for obj in masters'></select>
-
-						
-<!-- 						<select ng-model='selectedTrack' ng-init="selectedTrack=selectedTrack.title" ng-options='obj.title for obj in masters[selectedMaster.id-1].tracks'></select> -->
-						
-						<select ng-model='selectedTrack' ng-options='obj.trackCode for obj in masters[masters.indexOf(selectedMaster)].specialisation'></select>
+			<!-- By: Calle and Anna 2014-03-10 -->
+			<div class="col-md-12" id="courses">
+				<input type='text' ng-model='searchText' placeholder='Search...' />
+				
+				<select ng-model='selectedMaster'  
+						ng-init="selectedMaster=masters[masters.indexOf(selectedMaster)]" 
+						ng-options='obj.title for obj in masters'>
+				</select>
+				
+				<select ng-model='selectedTrack' 
+						ng-options='obj.trackCode for obj in masters[masters.indexOf(selectedMaster)].specialisation'>
+				</select>
 
 
-						<!-- we populate the drop down with the current tracks. -->
+				<!-- we populate the drop down with the current tracks. -->
+				{{selectedMaster.name}}
+				{{selectedTrack.title}}
+				
+				<table class="table">
+					<tr>
+						<th>Course name</th>
+						<th>Credits</th>
+						<th>Level</th>
+						<th>Period</th>
+					</tr>
+				
+		        	<tr ng-repeat="label in masters[selectedMaster.id-1].mandatoryCourses | filter:searchText">
+		        		<td>{{label.title}}</td>
+		        		<td>{{label.credits}}</td>
+		        		<td>{{label.level}}</td>
+		        		<td>{{label.period}}</td>
+		        	</tr>
+		        	<tr ng-repeat="label in selectedTrack.trackCourses | filter:searchText">
+		        		<td>{{label.title}}</td>
+		        		<td>{{label.credits}}</td>
+		        		<td>{{label.level}}</td>
+		        		<td>{{label.period}}</td>
+		        	</tr>
+				</table>
 
-						{{selectedMaster.name}}
-						{{selectedTrack.title}}
-					<table class="table">
-						<tr>
-							<th>Course name</th>
-							<th>Credits</th>
-							<th>Level</th>
-							<th>Period</th>
-						</tr>
-					
-			        	<tr ng-repeat="label in masters[selectedMaster.id-1].mandatoryCourses | filter:searchText"><td>{{label.title}}</td><td>{{label.credits}}</td><td>{{label.level}}</td><td>{{label.period}}</td></tr>
-			        	<tr ng-repeat="label in selectedTrack.trackCourses | filter:searchText"><td>{{label.title}}</td><td>{{label.credits}}</td><td>{{label.level}}</td><td>{{label.period}}</td></tr>
+			<!--
+				<option ng-repeat='label in people[selectedPerson.id].music'>{{label}}</option>
 
-			        	
-					</table>
+				<input type='text' ng-model='newCourse' />
+				<button ng-click='addNew()'>Add</button>
+			-->
+        	
+			</div>	<!-- /courses -->
+		</div>	<!-- /right -->
+</div>	<!-- /container-->
 
-					<!--
-					<option ng-repeat='label in people[selectedPerson.id].music'>{{label}}</option>
-
-<input type='text' ng-model='newCourse' />
-		        	<button ng-click='addNew()'>Add</button>
--->
-		        	
-					</div>
-				</div>
-		</div>
-				<!-- //////////////////////////// FLYTTA OVAN /////////////////////////////// -->
-		
-
-	</div>
-		<!-- HÄR SLUTAR CONTAINER-->
-</div>
