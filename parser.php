@@ -94,7 +94,7 @@ foreach($programmes as $programme){
 	
 	//if there's no specialisation courses we add the conditional ones to a custom made general track
 	if(empty($specialisation_courses)){
-		$specialisation_courses = array("trackCode"=>"general", "trackCourses"=>$conditional_courses);
+		$specialisation_courses = array(array("trackCode"=>"General", "trackCourses"=>$conditional_courses));
 	}
 
 	//Create programme objects with the corresponding courses
