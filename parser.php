@@ -54,7 +54,7 @@ foreach($programmes as $programme){
 				array_push($specialisation_list, $course);
 								
 			}
-			
+
 			//create "json-object"-compatible array for the Specialisation courses 
 			$specialisation_object = array("trackCode"=>"$specialisation_code","trackCourses" => $specialisation_list);
 			array_push($specialisation_courses, $specialisation_object);
@@ -92,8 +92,13 @@ foreach($programmes as $programme){
 		$programme = "Human Computer Interaction";
 	}
 	
+	//if there's no specialisation courses we add the conditional ones to a custom made general track
+	if(empty($specialisation_courses)){
+		$specialisation_courses = array("trackCode"=>"general", "trackCourses"=>$conditional_courses);
+	}
+
 	//Create programme objects with the corresponding courses
-	$programme_object = array("title"=>"$programme", "mandatory" => $mandatory_courses, "specialisation" =>$specialisation_courses, "conditional"=>$conditional_courses);
+	$programme_object = array("title"=>"$programme", "mandatory" => $mandatory_courses, "specialisation" =>$specialisation_courses);
 	array_push($course_list_all, $programme_object);
 }
 
