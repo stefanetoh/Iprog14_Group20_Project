@@ -4,7 +4,20 @@
 	width: 100%;
 }
 
+.progress-bar{
+	background-color: #42CA52;
+}
+
+#summary ul{
+	list-style: none;
+}
+#summary li{
+	display: inline;
+	padding-right: 2em;
+}
+
 .period{
+	overflow: scroll;
 	border-width: 0.2em;
 	border-color: black;
 	border-style: solid;
@@ -34,13 +47,6 @@
 	padding: 0.5em;
 }
 
-#coursesummary{
-	background-color: #3CBC3C;
-	padding: 0.5em;
-	margin-top: 1em;
-	margin-right: 1em;
-}
-
 #coursesummary ul{
 	list-style: none;
 	
@@ -53,3 +59,6 @@
 	margin-top: 1em;
 	margin-right: 1em;
 }
+
+/*UI Bootstrap fix*/
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

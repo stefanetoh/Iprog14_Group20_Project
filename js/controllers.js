@@ -18,11 +18,9 @@ myAcademicControllers.controller('MainController', ['$scope', '$http', '$routePa
 		console.log("$scope.selectedMaster: " + $scope.selectedMaster + " $scope.selectedTrack: " + $scope.selectedTrack);
 		//$scope.selectedTrack = JSON.parse($scope.selectedTrack);
 		$scope.searchText;
+		
 
-
-  		$scope.masters = [];
-
-		//Ajax magic på Stefan
+		//Ajax magic på Stefan 
 		var url = "parser.php";
         $.ajax({
 	        type: 'GET',
@@ -36,22 +34,27 @@ myAcademicControllers.controller('MainController', ['$scope', '$http', '$routePa
 	            console.log(e.message);
 	        }
         });
-
-
+        
+        
+        $scope.selectedCourses = [];
+        $scope.totalCredits=0;
+		
+		$scope.add = function(course) {
+			$scope.totalCredits += parseFloat(course.credits);
+        	$scope.selectedCourses.push(course);
+			$scope.newcourse = {};
+			$scope.dynamic = $scope.totalCredits;
+			$scope.progressBar();
+        }
+        
+        
 }]);
 
 myAcademicControllers.controller('WelcomeController', ['$scope', '$http',
   function($scope, $http) {
-		/*   		FIXA HTTP GET  */
 		$scope.selectedMaster;
 		$scope.understand = "test";
 		$scope.selectedTrack = null;
-
-
-		/*
-	  		TODO: use $http (HTTP GET) to populate $scope.masters with JSON.
-  		*/
-		$scope.masters = [];
 
 		//Ajax magic på Stefan
 		var url = "parser.php";
@@ -69,5 +72,35 @@ myAcademicControllers.controller('WelcomeController', ['$scope', '$http',
         });
 
 
-
   }]);
+
+
+myAcademicControllers.controller('periodOneController', ['$scope',
+  function($scope) {
+	  
+        $scope.remove = function(index, course){
+        	$scope.totalCredits = parseFloat(course.credits);
+	        $scope.selectedCourses.splice(index,1);
+	        $scope.dynamic = $scope.totalCredits;
+	        alert($scope.totalCredits);
+	        $scope.progressBar($scope.totalCredits);	//TEST
+        }
+	  
+/*
+  	  for(i=0; i<$scope.selectedCourses; i++){
+	  	  $scope.periodOneCourses.push("test");
+	  } 
+*/
+
+ }]);
+
+
+myAcademicControllers.controller('progressController', ['$scope',
+  function($scope) {
+	 $scope.max = 60;
+
+$scope.progressBar = function(value) {
+		alert(value);		
+		$scope.dynamic = $scope.totalCredits;
+	};
+ }]);

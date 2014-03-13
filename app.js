@@ -1,6 +1,7 @@
 var app = angular.module('MyApp', [
 	'ngRoute',
-	'myAcademicControllers'
+	'myAcademicControllers',
+	'ui.bootstrap'
 	]);
 
 /*
