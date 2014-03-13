@@ -11,16 +11,15 @@
 		<h3> Here you will be able to plan your coming academic year at KTH </h1>
 		
 		<select ng-model='selectedMaster' ng-options='obj.title for obj in masters'></select>
-		<select ng-model='selectedTrack' ng-options='obj.trackCode for obj in masters[masters.indexOf(selectedMaster)].specialisation'></select>
-		<!--<select ng-model="selectedTrack">
-			<option ng-repeat="label in masters[selectedMaster.id-1].tracks">{{label.title}}</option>
-		</select> -->
-		{{selectedTrack.title}}
-<!-- 					{{selectedMaster.id}} nu har vi det som ett json objekt!!!!! -->
+		<select ng-model='selectedTrack' ng-options='obj.trackCode for obj in masters[index].specialisation'></select>
+
+		
 		<br/>
+		<!-- This is for the routing. We send selectedMaster and selectedTrack so it can be reached by other controllers. Routing is set up in app.js -->
 		<a href="#/Master/{{selectedMaster}}/Track/{{selectedTrack}}"><button type="button" class="btn btn-success">Move On</button></a>
 	
 		
 	</div>
+	
 		<!-- HÄR SLUTAR CONTAINER-->
 </div>
