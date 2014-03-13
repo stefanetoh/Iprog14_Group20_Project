@@ -6,12 +6,6 @@
 			<hr id="divider">
 		</div>
 
-		{{selectedMaster.id}}
-		
-<!--
-		<input type='text' ng-model='inputValue' />
-		{{inputValue}}
--->
         
 		<div class="col-md-8" id="left">
 
@@ -23,11 +17,12 @@
 			</div>
 
 
-			<div class="col-md-5 period" id="period1">
+			<div class="col-md-5 period" id="period1" ng-controller='PeriodController'>
+	
 				<p class="bottom">Credits: </p>
 			</div>
 			
-			<div class="col-md-5 period" id="period2">
+			<div class="col-md-5 period" id="period2" ng-controller='PeriodController'>
 				<p class="bottom">Credits: </p>
 			</div>
 	
@@ -39,11 +34,11 @@
 				<h3>Period 4</h3>
 			</div>
 
-			<div class="col-md-5 period" id="period3">
+			<div class="col-md-5 period" id="period3" ng-controller='PeriodController'>
 				<p class="bottom">Credits: </p>
 			</div>
 			
-			<div class="col-md-5 period" id="period4">
+			<div class="col-md-5 period" id="period4" ng-controller='PeriodController'>
 				<p class="bottom">Credits: </p>
 			</div>
 
@@ -67,21 +62,20 @@
 			<!-- By: Calle and Anna 2014-03-10 -->
 			<div class="col-md-12" id="courses">
 				<input type='text' ng-model='searchText' placeholder='Search...' />
+				<!-- we populate the drop down with the masters and set the chosen master as init-value -->
+				<!-- index is the index of the master in the masters list. It updates when selectedMaster updates with $scope.$watch (in the controller) -->
 				
-				<select ng-model='selectedMaster'  
-						ng-init="selectedMaster=masters[masters.indexOf(selectedMaster)]" 
+				<select ng-init="selectedMaster=masters[{{index}}]"
+						ng-model='selectedMaster'  
 						ng-options='obj.title for obj in masters'>
 				</select>
-				
+				<!-- we populate the drop down with the current tracks. -->
+				<!-- trackIndex is the index of the chosen track in the inner JSON list for the corresponding chosen master -->
 				<select ng-model='selectedTrack' 
-						ng-options='obj.trackCode for obj in masters[masters.indexOf(selectedMaster)].specialisation'>
+						ng-init="selectedTrack=masters[{{index}}].specialisation[{{trackIndex}}]"
+						ng-options='obj.trackCode for obj in masters[index].specialisation'>
 				</select>
 
-
-				<!-- we populate the drop down with the current tracks. -->
-				{{selectedMaster.name}}
-				{{selectedTrack.title}}
-				
 				<table class="table">
 					<tr>
 						<th>Course name</th>
@@ -90,7 +84,7 @@
 						<th>Period</th>
 					</tr>
 				
-		        	<tr ng-repeat="label in masters[selectedMaster.id-1].mandatoryCourses | filter:searchText">
+		        	<tr ng-repeat="label in masters[masters.indexOf(selectedMaster)].mandatory | filter:searchText">
 		        		<td>{{label.title}}</td>
 		        		<td>{{label.credits}}</td>
 		        		<td>{{label.level}}</td>
@@ -102,14 +96,9 @@
 		        		<td>{{label.level}}</td>
 		        		<td>{{label.period}}</td>
 		        	</tr>
+
 				</table>
 
-			<!--
-				<option ng-repeat='label in people[selectedPerson.id].music'>{{label}}</option>
-
-				<input type='text' ng-model='newCourse' />
-				<button ng-click='addNew()'>Add</button>
-			-->
         	
 			</div>	<!-- /courses -->
 		</div>	<!-- /right -->
