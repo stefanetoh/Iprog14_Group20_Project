@@ -1,6 +1,10 @@
 
 /*
-Calle and Anna 2014-04-10:
+Calle and Anna 2014-03-10:
+
+// TODO: Maybe connect to the model instead, connected to the entire page at the moment
+  			Add set- and get-SelectedTrack/Master in model
+  			$broadcast when they change, move lists to model
 */
 
 
@@ -13,7 +17,7 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
 	$scope.selectedCourse = "DM1021";
 	$scope.selectedMaster = JSON.parse($routeParams.selectedMaster); // We get the chosen master-object as a string and parses it to a JSON object.
 	$scope.selectedTrack = JSON.parse($routeParams.selectedTrack);
-	//console.log("$scope.selectedMaster: " + $scope.selectedMaster.title + " $scope.selectedTrack: " + $scope.selectedTrack.trackCode);
+	console.log("$scope.selectedMaster: " + $scope.selectedMaster.title + " $scope.selectedTrack: " + $scope.selectedTrack.trackCode);
 	$scope.searchText;
 	
 	
@@ -26,32 +30,36 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
     $scope.index = $scope.masters.map(function(d) { return d['title']; }).indexOf($scope.selectedMaster.title);
     $scope.trackIndex = $scope.masters[$scope.index].specialisation.map(function(d) {
     	return d['trackCode']; }).indexOf($scope.selectedTrack.trackCode);
-    
-    /* $watch is a kind of listener. When selectedMaster is updated the inner code runs. 
-    Therefore $scope.index and $scope.trackIndex updates when selectedMaster updates.*/
-    $scope.$watch('selectedMaster', function(){
+    	
+
+	 // $watch is a kind of listener. When selectedMaster is updated the inner code runs. Therefore $scope.index and $scope.trackIndex updates when selectedMaster updates.
+	$scope.$watch('selectedMaster', function(){
 	        $scope.index = $scope.masters.map(function(d) { return d['title']; }).indexOf($scope.selectedMaster.title);
-	        $scope.trackIndex = $scope.masters[$scope.index].specialisation.map(function(d) {
-	        	return d['trackCode']; }).indexOf($scope.selectedTrack.trackCode);
-	        /*console.log("index " + $scope.index + "trackindex: " + $scope.trackIndex 
-	        + " $scope.selectedTrack.trackCode: " + $scope.selectedTrack.trackCode);*/
+	        $scope.selectedTrack = $scope.masters[$scope.index].specialisation[0]; //Set the init value to the first element in the list. 
+	        $scope.trackIndex = $scope.masters[$scope.index].specialisation.map(function(d) {return d['trackCode']; }).indexOf($scope.selectedTrack.trackCode);
+
+
+	        //console.log("index " + $scope.index + "trackindex: " + $scope.trackIndex + " $scope.selectedTrack.trackCode: " + $scope.selectedTrack.trackCode);
 	    
 	});	
-    /* $watch is a kind of listener. When selectedTrack is updated the inner code runs. 
-    Therefore $scope.index and $scope.trackIndex updates when selectedTrack updates.*/
+	
+	 // $watch is a kind of listener. When selectedTrack is updated the inner code runs. Therefore $scope.index and $scope.trackIndex updates when selectedTrack updates.
 	$scope.$watch('selectedTrack', function(){
+
 	        $scope.index = $scope.masters.map(function(d) { return d['title']; }).indexOf($scope.selectedMaster.title);
-	        $scope.trackIndex = $scope.masters[$scope.index].specialisation.map(function(d) {
-	        	return d['trackCode']; }).indexOf($scope.selectedTrack.trackCode);
-		
+	        $scope.trackIndex = $scope.masters[$scope.index].specialisation.map(function(d) {return d['trackCode']; }).indexOf($scope.selectedTrack.trackCode);
+		    	$scope.listMandatory = $scope.masters[$scope.index].mandatory;
+		$scope.listTracks = $scope.selectedTrack.trackCourses;
 	});
+
 
     //console.log("index är: " + $scope.index + "trackIndex är: " + $scope.trackIndex);
     
     
     // DRAG DROP!!!
-    
-    	$scope.listMandatory = $scope.masters[$scope.index].mandatory;
+    	
+    	// list with mandatory courses for chosen master, to be used  in the <tr>
+    	$scope.listMandatory = $scope.masters[$scope.index].mandatory; 
 		$scope.listTracks = $scope.selectedTrack.trackCourses;
 		$scope.p1List = [];
 		$scope.p2List = [];

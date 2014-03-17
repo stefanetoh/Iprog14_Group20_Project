@@ -8,8 +8,10 @@ app.service('coursesService', function($rootScope){
     var selectedCourses = [];
     var totalCredits = 0;   
     var advancedCredits = 0;
+/*
     var selectedMaster = "";
     var selectedTrack = "";
+*/
     var creditsP1 = 0;
     var creditsP2 = 0;
     var creditsP3 = 0;
@@ -65,6 +67,7 @@ app.service('coursesService', function($rootScope){
 			
 			if(period == "1"){
 	    		creditsP1 += courseCredits;
+	    		//push to p1List
 			}
 			else if(period == "2"){
 				creditsP2 += courseCredits;	    	
