@@ -17,7 +17,7 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
 	$scope.selectedCourse = "DM1021";
 	$scope.selectedMaster = JSON.parse($routeParams.selectedMaster); // We get the chosen master-object as a string and parses it to a JSON object.
 	$scope.selectedTrack = JSON.parse($routeParams.selectedTrack);
-	console.log("$scope.selectedMaster: " + $scope.selectedMaster.title + " $scope.selectedTrack: " + $scope.selectedTrack.trackCode);
+	//console.log("$scope.selectedMaster: " + $scope.selectedMaster.title + " $scope.selectedTrack: " + $scope.selectedTrack.trackCode);
 	$scope.searchText;
 	
 	
@@ -61,12 +61,15 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
     	// list with mandatory courses for chosen master, to be used  in the <tr>
     	$scope.listMandatory = $scope.masters[$scope.index].mandatory; 
 		$scope.listTracks = $scope.selectedTrack.trackCourses;
+		
+		//TODO: Add these lists to the model instead.
 		$scope.p1List = [];
 		$scope.p2List = [];
 		$scope.p3List = [];
 		$scope.p4List = [];
+		
+		//TODO Create new controller for the periods and paste this content.
 		$scope.currentPeriod = 0;
-
 		$scope.acceptP1 = {
 			activeClass: "ui-state-highlight",
 	    	accept: function(dragEl) {
