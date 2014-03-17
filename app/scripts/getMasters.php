@@ -1,5 +1,10 @@
 <?php
-// By Stefan Etoh, 2014-02-11 
+// Created by Stefan Etoh, 2014-02-11 
+//
+//
+// TODO: Figure out how to represent courses that span over multiple periods
+//
+//
 $programmes = array("TMETM", "THCIM");
 $course_list_all = array();
 
@@ -53,6 +58,20 @@ foreach($programmes as $programme){
 				$course = createCourseObject("$course_code", "$start_term", "$round_id");
 				array_push($specialisation_list, $course);
 								
+			}
+			
+			//Temporary solution to print the specialisation codes nicer for the end user
+			if($specialisation_code == "META"){
+				$specialisation_code = "Image and Video Technology";
+			}
+			elseif($specialisation_code == "METB"){
+				$specialisation_code = "Interactive Media Technology";
+			}
+			elseif($specialisation_code == "METC"){
+				$specialisation_code = "Audio Technology";
+			}
+			elseif($specialisation_code == "METD"){
+				$specialisation_code = "Printed Communication";
 			}
 
 			//create "json-object"-compatible array for the Specialisation courses 
