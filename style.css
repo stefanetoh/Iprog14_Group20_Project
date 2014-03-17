@@ -1,0 +1,68 @@
+#divider{
+  	height: 1px;
+  	background-color: #e5e5e5;
+	width: 100%;
+}
+
+.progress-bar{
+	background-color: #42CA52;
+}
+
+#summary ul{
+	list-style: none;
+}
+#summary li{
+	display: inline;
+	padding-right: 2em;
+}
+
+.period{
+	overflow: scroll;
+	border-width: 0.2em;
+	border-color: black;
+	border-style: solid;
+	padding: 0.4em;
+	margin-right: 1em;
+	height: 100px;
+}
+
+.bottom{
+    position: absolute;
+    bottom: 0px;
+    right: 5px;
+}
+
+#info{
+	border-width: 0.2em;
+	border-color: black;
+	border-style: solid;
+	padding: 0.4em;
+}
+
+#welcomePage{
+	text-align: center;
+}
+
+#courses{
+	padding: 0.5em;
+}
+
+#coursesummary ul{
+	list-style: none;
+	
+}
+
+#csn{
+	color:#FFFFFF;
+	background-color: #D70000;
+	padding: 0.5em;
+	margin-top: 1em;
+	margin-right: 1em;
+}
+
+#courseRow{
+	cursor: move;
+}
+
+/*UI Bootstrap fix*/
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

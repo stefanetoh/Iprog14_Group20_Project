@@ -1,0 +1,170 @@
+<div class="container" id='content' ng-app='MyApp' ng-controller='MainController'>		
+		<!-- By: Calle & Anna 2014-03-04 -->
+		
+		
+</div>
+		<div class="header">
+			<h1>Media Technology Course Planner</h1>
+			<hr id="divider">
+		</div>
+		
+		<div class="col-md-12">
+			<ul id="summary">
+				<li><strong>Total credits: </strong>{{totalCredits}}</li>
+				<li><strong>Advanced credits: </strong></li>
+				<li><strong>Credits from your track: </strong></li>
+			<ul>
+		</div>
+
+		<div class="col-md-12" ng-controller="progressController">
+			<progressbar max="max" value="dynamic"><span style="color:black; white-space:nowrap;">{{totalCredits}} / {{max}}</span></progressbar>
+		</div>
+
+        
+		<div class="col-md-7" id="left" ng-controller="periodController">
+
+			<div class="col-md-10">
+				<h3>Period 1 - total credits: </h3>
+
+			</div>
+
+<!--*********************************** ADD ", onDrop:'dropCallback'" ", applyFilter: 'filterIt'" TO jqyoui-droppable !! ************************************************************-->
+			<div class="col-md-10 period" id="period1" data-drop="true" ng-model="p1List" jqyoui-droppable="{multiple:true, onOver: 'overCallback'}" data-jqyoui-options="acceptP1">
+				
+	     	   	<table class="table" >
+	     	   		
+	        		<tr ng-repeat="course in p1List track by $index | filter: {period:'1'}" ng-show="course.title" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="p1List" jqyoui-draggable="{index: {{$index}},animate:true}">
+<!-- 	        			<td class="placeholder" ng-hide="hideMe()">Add your courses here!</td> -->
+	        			<td>{{course.title}}</td>
+	        			<td>{{course.credits}}</td>
+	        			<td>{{course.level}}</td>
+	        			<td><input type="Button" value="Delete" ng-click="remove($index, course)" /></td>
+	        		</tr>
+	        	</table>
+				
+			</div>
+			
+			
+			
+			<div class="col-md-10">
+				<h3>Period 2</h3>
+			</div>
+			
+			
+			
+			<div class="col-md-10 period" id="period2" data-drop="true" ng-model="p2List" jqyoui-droppable="{multiple:true, onOver: 'overCallback'}" data-jqyoui-options="acceptP2">
+				<table class="table">
+	        		<tr ng-repeat="course in p2List track by $index | filter: {period:'2'}" ng-show="course.title" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="p2List" jqyoui-draggable="{index: {{$index}},animate:true}">
+	        			<td>{{course.title}}</td>
+	        			<td>{{course.credits}}</td>
+	        			<td>{{course.level}}</td>
+	        			<td><input type="Button" value="Delete" ng-click="remove($index, course)" /></td>
+	        		</tr>
+	        	</table>
+				<p class="bottom">Credits: </p>
+			</div>
+	
+			
+			<div class="col-md-10">
+				<h3>Period 3</h3>
+			</div>
+
+			<div class="col-md-10 period" id="period3" data-drop="true" ng-model="p3List" jqyoui-droppable="{multiple:true, onOver: 'overCallback'}" data-jqyoui-options="acceptP3">
+	     	   	<table class="table">
+	        		<tr ng-repeat="course in p3List track by $index | filter: {period:'3'}" ng-show="course.title" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="p3List" jqyoui-draggable="{index: {{$index}},animate:true}">
+	        			<td>{{course.title}}</td>
+	        			<td>{{course.credits}}</td>
+	        			<td>{{course.level}}</td>
+	        			<td><input type="Button" value="Delete" ng-click="remove($index, course)" /></td>
+	        		</tr>
+	        	</table>
+				<p class="bottom">Credits: </p>
+			</div>
+			
+			<div class="col-md-10">
+				<h3>Period 4</h3>
+			</div>
+
+			
+			<div class="col-md-10 period" id="period4" data-drop="true" ng-model="p4List" jqyoui-droppable="{multiple:true, onOver: 'overCallback'}" data-jqyoui-options="acceptP4">
+	     	   	<table class="table">
+	        		<tr ng-repeat="course in p4List track by $index | filter: {period:'4'}" ng-show="course.title" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="p4List" jqyoui-draggable="{index: {{$index}},animate:true}">
+	        			<td>{{course.title}}</td>
+	        			<td>{{course.credits}}</td>
+	        			<td>{{course.level}}</td>
+	        			<td><input type="Button" value="Delete" ng-click="remove($index, course)" /></td>
+	        		</tr>
+	        	</table>
+
+				<p class="bottom">Credits: </p>
+			</div>
+
+
+<!--
+		
+			<div class="col-md-10" id="csn">
+				<h3>CSN disapproves. Keep on editing.</h3>
+			</div>
+-->
+		</div>
+
+		<div class="col-md-5" id="right">
+<!--
+			<div class="col-md-12  bg-info text-info" id="info">
+				<span class="glyphicon glyphicon-info-sign"></span>
+				<p>Drag and drop the courses you would like to take into their respective period to create your academic year.</p>
+			</div>
+-->
+					
+			<!-- By: Calle and Anna 2014-03-10 -->
+			<div class="col-md-12" id="courses">
+				<input type='text' ng-model='searchText' placeholder='Search...' />
+				<!-- we populate the drop down with the masters and set the chosen master as init-value -->
+				<!-- index is the index of the master in the masters list. It updates when selectedMaster updates with $scope.$watch (in the controller) -->
+				
+				<select ng-init="selectedMaster=masters[{{index}}]"
+						ng-model='selectedMaster'  
+						ng-options='obj.title for obj in masters'>
+				</select>
+				<!-- we populate the drop down with the current tracks. -->
+				<!-- trackIndex is the index of the chosen track in the inner JSON list for the corresponding chosen master -->
+				<select ng-model='selectedTrack' 
+						ng-init='selectedTrack=masters[{{index}}].specialisation[{{trackIndex}}]'
+						ng-options='obj.trackCode for obj in masters[index].specialisation'>
+				</select>
+				
+
+				<table class="table table-striped">
+					<tr>
+						<th>Course name</th>
+						<th>Credits</th>
+						<th>Level</th>
+						<th>Period</th>
+						<th></th>
+					</tr>
+					
+					<tr id="mandatory" ng-repeat="course in listOne | filter:searchText" ng-show="course.title" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="listOne" jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep', onStart: 'startCallback'}">
+			        		<td>{{course.title}}</td>
+			        		<td>{{course.credits}}</td>
+			        		<td>{{course.level}}</td>
+			        		<td>{{course.period}}</td>
+
+			        </tr>
+					
+<!-- 				course in selectedTrack.trackCourses -->
+		        	<tr id="trackCourse" ng-repeat="course in listTracks | filter:searchText" ng-show="course.title" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="listTracks" jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep', onStart: 'startCallback'}">>
+		        		<td>{{course.title}}</td>
+		        		<td>{{course.credits}}</td>
+		        		<td>{{course.level}}</td>
+		        		<td>{{course.period}}</td>
+		        		<td><input type="button" value="Add" ng-click="add(course)" /></td>
+		        	</tr>
+
+				</table>
+
+        	
+			</div>	<!-- /courses -->
+		</div>	<!-- /right -->
+</div>	<!-- /container-->
+
+

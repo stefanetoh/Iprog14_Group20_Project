@@ -1,0 +1,25 @@
+<div class="container" id='content' ng-app='MyApp' ng-controller='WelcomeController'>		
+		<!-- By: Calle & Anna 2014-03-04 -->
+		
+	<div class="header">
+		<h1>Media Technology Course Planner</h1>
+		<hr id="divider">
+	</div>
+    
+	<div class="col-md-12" id="welcomePage">
+		<h1> Welcome to My Academic Year </h1>
+		<h3> Here you will be able to plan your coming academic year at KTH </h1>
+		
+		<select ng-model='selectedMaster' ng-options='obj.title for obj in masters'></select>
+		<select ng-model='selectedTrack' ng-options='obj.trackCode for obj in masters[index].specialisation'></select>
+
+		
+		<br/>
+		<!-- This is for the routing. We send selectedMaster and selectedTrack so it can be reached by other controllers. Routing is set up in app.js -->
+		<a href="#/Master/{{selectedMaster}}/Track/{{selectedTrack}}"><button type="button" class="btn btn-success">Move On</button></a>
+	
+		
+	</div>
+	
+		<!-- HÄR SLUTAR CONTAINER-->
+</div>
