@@ -8,10 +8,38 @@ OBS! WE MUST ADD CONTROLLERS FOR EACH VIEW/DIV!
 var myAcademicControllers = angular.module('myAcademicControllers', []);
 
 
+/* -------------------------------------------SERVICES SOLUTION-----------------------------------------------------
+myAcademicControllers.service('SelectedCoursesService', function(){	
+    var selectedCourses = [];
+    var totalCredits = 0;   
+    this.add = function (course) {
+    	//alert("Totalcredits innan add: "+totalCredits);
+		totalCredits += parseFloat(course.credits);
+		//alert("Totalcredits efter add: "+totalCredits);
+    	selectedCourses.push(course);
+    	var index = selectedCourses.indexOf(course);
+		//alert("Saved correctly: "+selectedCourses[index].code);
+    } 
+    this.remove = function (course) {   
+    	totalCredits -= parseFloat(course.credits);
+		//determine position of course in array and remove it
+        var index = selectedCourses.indexOf(course);
+        selectedCourses.splice(index,1);
+    }	
+	this.total = function(){
+        return totalCredits;
+    }
+    this.list = function(){
+        return selectedCourses;
+    }       
+});
+-------------------------------------END OF  SERVICES SOLUTION--------------------------------------------------*/
+
+
 
 /* ------------Controller for mainView ------------*/
-myAcademicControllers.controller('MainController', ['$scope', '$http', '$routeParams', '$filter',
-  function($scope, $http, $routeParams, $filter) {
+myAcademicControllers.controller('MainController', ['$scope', '$http', '$routeParams', 
+  function($scope, $http, $routeParams) {
 
 		$scope.inputValue = "";
 		$scope.selectedCourse = "DM1021";
@@ -19,8 +47,7 @@ myAcademicControllers.controller('MainController', ['$scope', '$http', '$routePa
 		$scope.selectedTrack = JSON.parse($routeParams.selectedTrack);
 		//console.log("$scope.selectedMaster: " + $scope.selectedMaster.title + " $scope.selectedTrack: " + $scope.selectedTrack.trackCode);
 		$scope.searchText;
-		
-		
+
 
 		//Ajax magic by Stefan
 		var url = "parser.php";
@@ -37,18 +64,35 @@ myAcademicControllers.controller('MainController', ['$scope', '$http', '$routePa
 	        }
         });
         
-        
+ //----------------------------------- MAIN CONTROLLER SOLUTION---------------------------//       
         $scope.selectedCourses = [];
         $scope.totalCredits=0;
+		$scope.max=60;
 		
-		$scope.add = function(course) {
+		$scope.addCourse = function(course) {
 			$scope.totalCredits += parseFloat(course.credits);
         	$scope.selectedCourses.push(course);
 			$scope.newcourse = {};
 			$scope.dynamic = $scope.totalCredits;
-			$scope.progressBar();
+			
+
+			//$scope.progressBar();
         }
         
+        
+		$scope.removeCourse = function(course){
+        	$scope.totalCredits -= parseFloat(course.credits);
+	        
+	        var index = $scope.selectedCourses.indexOf(course);
+	        $scope.selectedCourses.splice(index,1);
+	        $scope.dynamic = $scope.totalCredits;
+	        
+	        if($course.level == "Second cycle"){
+		        $scope.totalCredits -= parseFloat(course.credits);
+	        }
+	        //$scope.progressBar();	//TEST
+        }
+//--------------------------------END OF MAIN CONTROLLER SOLUTION-----------------------//        
         
         
         // Calle and Anna 2014-03-13
@@ -69,64 +113,8 @@ myAcademicControllers.controller('MainController', ['$scope', '$http', '$routePa
 		        $scope.trackIndex = $scope.masters[$scope.index].specialisation.map(function(d) {return d['trackCode']; }).indexOf($scope.selectedTrack.trackCode);
 			
 		});
-		
-		/*
-$scope.list1 = $scope.masters[$scope.index].mandatory;
-		$scope.list2 = {};
-*/
 
-		$scope.listOne = $scope.masters[$scope.index].mandatory;
-		$scope.listTracks = $scope.selectedTrack.trackCourses;
-		$scope.p1List = [];
-		$scope.p2List = [];
-		$scope.p3List = [];
-		$scope.p4List = [];
-		$scope.currentPeriod = 0;
-
-		$scope.acceptP1 = {
-			activeClass: "ui-state-highlight",
-	    	accept: function(dragEl) {
-		    if ($scope.currentPeriod==1) {
-			    //console.log("inne i acceptFunciton");
-			    return true;
-        }
-        }
-        }
-        
-        $scope.acceptP2 = {
-       	 	activeClass: "ui-state-highlight",
-	    	accept: function(dragEl) {
-		    if ($scope.currentPeriod==2) {
-			    //console.log("inne i acceptFunciton");
-			    return true;
-        }
-        }
-        }
-        
-        $scope.acceptP3 = {
-        	activeClass: "ui-state-highlight",
-	    	accept: function(dragEl) {
-		    if ($scope.currentPeriod==3) {
-			    //console.log("inne i acceptFunciton");
-			    return true;
-        }
-        }
-        }		
-        
-        $scope.acceptP4 = {
-        	activeClass: "ui-state-highlight",
-	    	accept: function(dragEl) {
-		    if ($scope.currentPeriod==4) {
-			    //console.log("inne i acceptFunciton");
-			    return true;
-        }
-        }
-        }	
-        
-        
-   		$scope.startCallback = function(event, ui){
-			$scope.currentPeriod = $(this)[0].course.period; //Selects the period of the course being dragged at the moment.			
-		}
+        //console.log("index är: " + $scope.index + "trackIndex är: " + $scope.trackIndex);
 
 }]);
 
@@ -181,39 +169,49 @@ myAcademicControllers.controller('WelcomeController', ['$scope', '$http',
 			
 		});
 		
-		
-		
   }]);
 
-
-
-//By Stefan
-myAcademicControllers.controller('periodController', ['$scope',
-  function($scope, Data) {
-	  	$scope.data = Data;
-        $scope.remove = function(index, course){
-        	$scope.totalCredits = parseFloat(course.credits);
-	        $scope.selectedCourses.splice(index,1);
-	        $scope.dynamic = $scope.totalCredits;
-	        alert($scope.totalCredits);
-	        $scope.progressBar($scope.totalCredits);	//TEST
-        }
-	  
 /*
-  	  for(i=0; i<$scope.selectedCourses; i++){
-	  	  $scope.periodOneCourses.push("test");
-	  } 
-*/
 
- }]);
+//------------------------------------------SERVICES SOLUTION_______________________________________//
+//By Stefan
+
+myAcademicControllers.controller('periodController', ['$scope', 'SelectedCoursesService',
+	function($scope, SelectedCoursesService) {
+		$scope.selectedCourses = SelectedCoursesService.list();
+		$scope.totalCredits = SelectedCoursesService.total();
+		$scope.removeCourse = function(course) {
+			SelectedCoursesService.remove(course);	
+        }    
+	}
+]);
+myAcademicControllers.controller('coursesController', ['$scope', 'SelectedCoursesService', 
+	function($scope, SelectedCoursesService){		
+		$scope.addCourse = function(course) {
+			SelectedCoursesService.add(course);
+			
+			$scope.totalCredits = SelectedCoursesService.total();
+			$scope.selectedCourses = SelectedCoursesService.list();
+        }			
+	
+	}
+]);
+myAcademicControllers.controller('progressController', ['$scope', 'SelectedCoursesService', 
+	function($scope, SelectedCoursesService) {
+		$scope.max = 60;
+		$scope.totalCredits = SelectedCoursesService.total();
+//		$scope.progressBar = function(value) {
+			$scope.dynamic = SelectedCoursesService.total();
+	//	};
+	}
+]);
+myAcademicControllers.controller('creditsMenuController', ['$scope', 'SelectedCoursesService', 
+	function($scope, SelectedCoursesService) {
+		$scope.selectedCourses = SelectedCoursesService.list();
+		$scope.totalCredits = SelectedCoursesService.total();
+		
+	}
+]);
+---------------------------------END OF SERVICES SOLUTION----------------------------------------*/
 
 
-myAcademicControllers.controller('progressController', ['$scope',
-  function($scope, Data) {
-	 $scope.max = 60;
-	 $scope.data = Data;
-$scope.progressBar = function(value) {
-		alert(value);		
-		$scope.dynamic = $scope.totalCredits;
-	};
- }]);

@@ -1,11 +1,13 @@
 <div class="container" id='content' ng-app='MyApp' ng-controller='MainController'>		
 		<!-- By: Calle & Anna 2014-03-04 -->
 		
+		
+</div>
 		<div class="header">
 			<h1>Media Technology Course Planner</h1>
 			<hr id="divider">
 		</div>
-
+		
 		<div class="col-md-12">
 			<ul id="summary">
 				<li><strong>Total credits: </strong>{{totalCredits}}</li>
@@ -19,24 +21,29 @@
 		</div>
 
         
-		<div class="col-md-7" id="left">
+		<div class="col-md-7" id="left" ng-controller="periodController">
 
 			<div class="col-md-10">
-				<h3>Period 1</h3>
+				<h3>Period 1 - total credits: </h3>
+
 			</div>
 
-
-			<div class="col-md-10 period" id="period1" ng-controller="periodOneController">
-	     	   	<table class="table">
-	        		<tr ng-repeat="course in selectedCourses | filter: {period:'1'}">
+<!--*********************************** ADD ", onDrop:'dropCallback'" ", applyFilter: 'filterIt'" TO jqyoui-droppable !! ************************************************************-->
+			<div class="col-md-10 period" id="period1" data-drop="true" ng-model="p1List" jqyoui-droppable="{multiple:true, onOver: 'overCallback'}" data-jqyoui-options="acceptP1">
+				
+	     	   	<table class="table" >
+	     	   		
+	        		<tr ng-repeat="course in p1List track by $index | filter: {period:'1'}" ng-show="course.title" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="p1List" jqyoui-draggable="{index: {{$index}},animate:true}">
+<!-- 	        			<td class="placeholder" ng-hide="hideMe()">Add your courses here!</td> -->
 	        			<td>{{course.title}}</td>
 	        			<td>{{course.credits}}</td>
 	        			<td>{{course.level}}</td>
 	        			<td><input type="Button" value="Delete" ng-click="remove($index, course)" /></td>
 	        		</tr>
 	        	</table>
-				<p class="bottom">Credits:</p>
+				
 			</div>
+			
 			
 			
 			<div class="col-md-10">
@@ -45,9 +52,9 @@
 			
 			
 			
-			<div class="col-md-10 period" id="period2">
+			<div class="col-md-10 period" id="period2" data-drop="true" ng-model="p2List" jqyoui-droppable="{multiple:true, onOver: 'overCallback'}" data-jqyoui-options="acceptP2">
 				<table class="table">
-	        		<tr ng-repeat="course in selectedCourses | filter: {period:'2'}">
+	        		<tr ng-repeat="course in p2List track by $index | filter: {period:'2'}" ng-show="course.title" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="p2List" jqyoui-draggable="{index: {{$index}},animate:true}">
 	        			<td>{{course.title}}</td>
 	        			<td>{{course.credits}}</td>
 	        			<td>{{course.level}}</td>
@@ -62,9 +69,9 @@
 				<h3>Period 3</h3>
 			</div>
 
-			<div class="col-md-10 period" id="period3">
+			<div class="col-md-10 period" id="period3" data-drop="true" ng-model="p3List" jqyoui-droppable="{multiple:true, onOver: 'overCallback'}" data-jqyoui-options="acceptP3">
 	     	   	<table class="table">
-	        		<tr ng-repeat="course in selectedCourses | filter: {period:'3'}">
+	        		<tr ng-repeat="course in p3List track by $index | filter: {period:'3'}" ng-show="course.title" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="p3List" jqyoui-draggable="{index: {{$index}},animate:true}">
 	        			<td>{{course.title}}</td>
 	        			<td>{{course.credits}}</td>
 	        			<td>{{course.level}}</td>
@@ -79,9 +86,9 @@
 			</div>
 
 			
-			<div class="col-md-10 period" id="period4">
+			<div class="col-md-10 period" id="period4" data-drop="true" ng-model="p4List" jqyoui-droppable="{multiple:true, onOver: 'overCallback'}" data-jqyoui-options="acceptP4">
 	     	   	<table class="table">
-	        		<tr ng-repeat="course in selectedCourses | filter: {period:'4'}">
+	        		<tr ng-repeat="course in p4List track by $index | filter: {period:'4'}" ng-show="course.title" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="p4List" jqyoui-draggable="{index: {{$index}},animate:true}">
 	        			<td>{{course.title}}</td>
 	        			<td>{{course.credits}}</td>
 	        			<td>{{course.level}}</td>
@@ -122,10 +129,10 @@
 				<!-- we populate the drop down with the current tracks. -->
 				<!-- trackIndex is the index of the chosen track in the inner JSON list for the corresponding chosen master -->
 				<select ng-model='selectedTrack' 
-						ng-init="selectedTrack=masters[{{index}}].specialisation[{{trackIndex}}]"
+						ng-init='selectedTrack=masters[{{index}}].specialisation[{{trackIndex}}]'
 						ng-options='obj.trackCode for obj in masters[index].specialisation'>
 				</select>
-
+				
 
 				<table class="table table-striped">
 					<tr>
@@ -135,13 +142,17 @@
 						<th>Period</th>
 						<th></th>
 					</tr>
-					<tr ng-repeat="course in masters[masters.indexOf(selectedMaster)].mandatory | filter:searchText">
-		        		<td>{{course.title}}</td>
-		        		<td>{{course.credits}}</td>
-		        		<td>{{course.level}}</td>
-		        		<td>{{course.period}}</td>
-		        	</tr>
-		        	<tr ng-repeat="course in selectedTrack.trackCourses | filter:searchText">
+					
+					<tr id="mandatory" ng-repeat="course in listOne | filter:searchText" ng-show="course.title" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="listOne" jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep', onStart: 'startCallback'}">
+			        		<td>{{course.title}}</td>
+			        		<td>{{course.credits}}</td>
+			        		<td>{{course.level}}</td>
+			        		<td>{{course.period}}</td>
+
+			        </tr>
+					
+<!-- 				course in selectedTrack.trackCourses -->
+		        	<tr id="trackCourse" ng-repeat="course in listTracks | filter:searchText" ng-show="course.title" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="listTracks" jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep', onStart: 'startCallback'}">>
 		        		<td>{{course.title}}</td>
 		        		<td>{{course.credits}}</td>
 		        		<td>{{course.level}}</td>

@@ -3,26 +3,21 @@
 <head>
 	<title>My Academic Year</title>
 	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<!-- 
-	*************************************************************************************************************
 
-	WE JUST ADD A ng-controller TO THE DIVS BELOW. YOU CAN HAVE DIFFERENT CONTROLLERS ON DIFFERENT DIVS
-	WITH DIFFERENT ng-model! 
-
-	The $scope is called a Veiw-Model and is passed in, for example, MainController.js
-	
-	*************************************************************************************************************
-	-->
 
 	<div ng-view></div>
 
 
     <!-- jQuery -->
+    
     <script src="https://code.jquery.com/jquery.js"></script>
+<!-- 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
 
     <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
@@ -30,18 +25,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular.min.js" type="text/javascript"></script>
     <script src="lib/angular-route.js" type="text/javascript"></script>
 
+    <script src="lib/angular-dragdrop.min.js"></script>
+    
     <script src="app.js" type="text/javascript"></script>
 	<script src="js/controllers.js" type="text/javascript"></script>
+	
 	
 	
 	<!-- UI Bootstrap: http://angular-ui.github.io/bootstrap/  -->
 	<script src="ui-bootstrap-tpls-0.10.0.min.js" type="text/javascript"></script>
     
-    <script>
-    	//Script to add background to every other tr-element
-    	$( "tr:even" ).css( "background-color", "#C3E4ED" );
-		$( "tr:odd" ).css( "background-color", "#e4e4e4" );
-	</script>
+
 
 
 	</body>
