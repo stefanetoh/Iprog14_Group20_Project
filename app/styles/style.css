@@ -1,7 +1,20 @@
-#divider{
-  	height: 1px;
-  	background-color: #e5e5e5;
-	width: 100%;
+#header{
+	color: black;
+}
+
+#header a:hover{
+	text-decoration: underline;
+	color:black;
+}
+
+#creditsOverview{
+	border-width: 1px;
+	border-color: #ddd;
+	border-style: solid;
+	border-radius: 14px 14px 14px 14px;
+	padding: 1em;
+	margin: 1em;
+	margin-bottom: 2em;
 }
 
 .progress-bar{
@@ -13,7 +26,8 @@
 }
 #summary li{
 	display: inline;
-	padding-right: 2em;
+	padding-right: 4em;
+	margin-left: -3em;
 }
 
 .period{
@@ -26,11 +40,6 @@
 	height: 100px;
 }
 
-.bottom{
-    position: absolute;
-    bottom: 0px;
-    right: 5px;
-}
 
 #info{
 	border-width: 0.2em;
