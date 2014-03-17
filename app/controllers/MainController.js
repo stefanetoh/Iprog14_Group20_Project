@@ -8,6 +8,7 @@ Calle and Anna 2014-04-10:
 /* ------------Controller for mainView ------------*/
 app.controller('MainController', function($scope, $http, $routeParams, coursesService) {
 
+
 	$scope.inputValue = "";
 	$scope.selectedCourse = "DM1021";
 	$scope.selectedMaster = JSON.parse($routeParams.selectedMaster); // We get the chosen master-object as a string and parses it to a JSON object.
@@ -23,22 +24,84 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
     // Calle and Anna 2014-03-13
     // Saves the correct index of the chosen master and track from the JSON object
     $scope.index = $scope.masters.map(function(d) { return d['title']; }).indexOf($scope.selectedMaster.title);
-    $scope.trackIndex = $scope.masters[$scope.index].specialisation.map(function(d) {return d['trackCode']; }).indexOf($scope.selectedTrack.trackCode);
+    $scope.trackIndex = $scope.masters[$scope.index].specialisation.map(function(d) {
+    	return d['trackCode']; }).indexOf($scope.selectedTrack.trackCode);
     
-    // $watch is a kind of listener. When selectedMaster is updated the inner code runs. Therefore $scope.index and $scope.trackIndex updates when selectedMaster updates.
+    /* $watch is a kind of listener. When selectedMaster is updated the inner code runs. 
+    Therefore $scope.index and $scope.trackIndex updates when selectedMaster updates.*/
     $scope.$watch('selectedMaster', function(){
 	        $scope.index = $scope.masters.map(function(d) { return d['title']; }).indexOf($scope.selectedMaster.title);
-	        $scope.trackIndex = $scope.masters[$scope.index].specialisation.map(function(d) {return d['trackCode']; }).indexOf($scope.selectedTrack.trackCode);
-	        //console.log("index " + $scope.index + "trackindex: " + $scope.trackIndex + " $scope.selectedTrack.trackCode: " + $scope.selectedTrack.trackCode);
+	        $scope.trackIndex = $scope.masters[$scope.index].specialisation.map(function(d) {
+	        	return d['trackCode']; }).indexOf($scope.selectedTrack.trackCode);
+	        /*console.log("index " + $scope.index + "trackindex: " + $scope.trackIndex 
+	        + " $scope.selectedTrack.trackCode: " + $scope.selectedTrack.trackCode);*/
 	    
 	});	
-    // $watch is a kind of listener. When selectedTrack is updated the inner code runs. Therefore $scope.index and $scope.trackIndex updates when selectedTrack updates.
+    /* $watch is a kind of listener. When selectedTrack is updated the inner code runs. 
+    Therefore $scope.index and $scope.trackIndex updates when selectedTrack updates.*/
 	$scope.$watch('selectedTrack', function(){
 	        $scope.index = $scope.masters.map(function(d) { return d['title']; }).indexOf($scope.selectedMaster.title);
-	        $scope.trackIndex = $scope.masters[$scope.index].specialisation.map(function(d) {return d['trackCode']; }).indexOf($scope.selectedTrack.trackCode);
+	        $scope.trackIndex = $scope.masters[$scope.index].specialisation.map(function(d) {
+	        	return d['trackCode']; }).indexOf($scope.selectedTrack.trackCode);
 		
 	});
 
     //console.log("index är: " + $scope.index + "trackIndex är: " + $scope.trackIndex);
+    
+    
+    // DRAG DROP!!!
+    
+    	$scope.listMandatory = $scope.masters[$scope.index].mandatory;
+		$scope.listTracks = $scope.selectedTrack.trackCourses;
+		$scope.p1List = [];
+		$scope.p2List = [];
+		$scope.p3List = [];
+		$scope.p4List = [];
+		$scope.currentPeriod = 0;
+
+		$scope.acceptP1 = {
+			activeClass: "ui-state-highlight",
+	    	accept: function(dragEl) {
+			    if ($scope.currentPeriod==1) {
+				    //console.log("inne i acceptFunciton");
+				    return true;
+				}
+			}
+        }
+        
+        $scope.acceptP2 = {
+       	 	activeClass: "ui-state-highlight",
+	    	accept: function(dragEl) {
+		    if ($scope.currentPeriod==2) {
+			    //console.log("inne i acceptFunciton");
+			    return true;
+        }
+        }
+        }
+        
+        $scope.acceptP3 = {
+        	activeClass: "ui-state-highlight",
+	    	accept: function(dragEl) {
+		    if ($scope.currentPeriod==3) {
+			    //console.log("inne i acceptFunciton");
+			    return true;
+        }
+        }
+        }		
+        
+        $scope.acceptP4 = {
+        	activeClass: "ui-state-highlight",
+	    	accept: function(dragEl) {
+		    if ($scope.currentPeriod==4) {
+			    //console.log("inne i acceptFunciton");
+			    return true;
+        }
+        }
+        }	
+        
+        
+   		$scope.startCallback = function(event, ui){
+			$scope.currentPeriod = $(this)[0].course.period; //Selects the period of the course being dragged at the moment.			
+		}
 
 });

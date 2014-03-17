@@ -8,6 +8,12 @@ app.controller('WelcomeController', function($scope, $http, coursesService) {
 	//Get the masters via the service (By Stefan, 2014-03-16)
 	$scope.masters = coursesService.getMasters();
     
+/*
+	$scope.setSelectedMasterIndex = function (selectedMaster){
+		coursesService.setSelectedIndex(selectedMaster);
+	}
+*/
+
     // Calle and Anna 2014-03-13
     // INIT the variables
     $scope.selectedMaster = $scope.masters[0];
@@ -36,4 +42,7 @@ app.controller('WelcomeController', function($scope, $http, coursesService) {
 	        $scope.trackIndex = $scope.masters[$scope.index].specialisation.map(function(d) {return d['trackCode']; }).indexOf($scope.selectedTrack.trackCode);
 		
 	});
+
+
+
 });

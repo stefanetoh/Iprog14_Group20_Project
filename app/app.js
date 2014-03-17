@@ -1,7 +1,5 @@
-
 var app = angular.module('MyApp', [
 	'ngRoute',
-	'myAcademicControllers',
 	'ui.bootstrap',
 	'ngDragDrop'
 	]);
