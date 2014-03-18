@@ -12,13 +12,13 @@
 }
 
 #creditsOverview{
-	border-width: 1px;
+	border-width: 0px;
 	border-color: #ddd;
 	border-style: solid;
-	border-radius: 14px 14px 14px 14px;
+	border-radius: 0px 0px 0px 3px;
 	padding: 1em;
-	margin: 1em;
-	margin-bottom: 2em;
+	//margin: 1em;
+	background-color: #f9f9f9;
 }
 
 .progress-bar{
@@ -53,6 +53,7 @@
 }
 
 #welcomePage{
+	margin-top: 8em;
 	text-align: center;
 }
 
@@ -76,6 +77,29 @@
 #alert{
 	cursor: pointer;
 }
+
+body{
+	background-image: url("http://cloth5.com/wp-content/themes/gonzo/images/backgrounds/tactile_noise.png");
+}
+
+#right {
+	background-color: #f9f9f9;
+	border-width: 0px;
+	border-color: #ddd;
+	border-style: solid;
+	border-radius: 0px 0px 3px 3px;
+	padding:1em;
+	margin-bottom:7em;
+}
+
+#left {
+	padding-top:1em;
+	padding-left:0;
+}
+.btn {
+	padding: 2px 6px;
+}
+
 
 /*UI Bootstrap fix*/
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

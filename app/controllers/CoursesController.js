@@ -7,5 +7,6 @@ app.controller('CoursesController', function($scope, coursesService){
 				
 	$scope.addCourse = function(course) {
 		coursesService.add(course);
+		console.log("i coursesController");
     }			
 });

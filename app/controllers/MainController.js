@@ -1,6 +1,6 @@
 
 /*
-Calle and Anna 2014-03-10:
+Calle and Anna 2014-03-10: Updates by Johan Bäckman 2014-03-18.
 
 // TODO: Maybe connect to the model instead, connected to the entire page at the moment
   			Add set- and get-SelectedTrack/Master in model
@@ -19,6 +19,7 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
 	$scope.selectedTrack = JSON.parse($routeParams.selectedTrack);
 	//console.log("$scope.selectedMaster: " + $scope.selectedMaster.title + " $scope.selectedTrack: " + $scope.selectedTrack.trackCode);
 	$scope.searchText;
+	$scope.currentCourse;
 	
 	
 	//Get the masters via the service (By Stefan)
@@ -62,11 +63,6 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
     	$scope.listMandatory = $scope.masters[$scope.index].mandatory; 
 		$scope.listTracks = $scope.selectedTrack.trackCourses;
 		
-		//TODO: Add these lists to the model instead.
-		$scope.p1List = [];
-		$scope.p2List = [];
-		$scope.p3List = [];
-		$scope.p4List = [];
 		
 		//TODO Create new controller for the periods and paste this content.
 		$scope.currentPeriod = 0;
@@ -112,7 +108,9 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
         
         
    		$scope.startCallback = function(event, ui){
-			$scope.currentPeriod = $(this)[0].course.period; //Selects the period of the course being dragged at the moment.			
+			$scope.currentPeriod = $(this)[0].course.period; 	//Selects the period of the course being dragged at the moment.	
+			$scope.currentCourse = $(this)[0].course;			//TODO: Can't find this variable in HTML-page.  	
+			console.log("i startCallBack, håller i: " + $scope.currentCourse.title);
 		}
 
 });
