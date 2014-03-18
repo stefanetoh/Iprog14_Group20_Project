@@ -93,7 +93,7 @@ app.service('coursesService', function($rootScope){
 		var courseAdded = false;
 		
 		for(var i=0; i<selectedCourses.length; i++){
-			if(selectedCourses[i].code == course.code){
+			if(selectedCourses[i] == course){
 				courseAdded = true;
 			}
 		}
