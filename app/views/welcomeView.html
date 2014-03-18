@@ -8,8 +8,8 @@
 		
 		<p>Choose your master: </p>
 		
-		<select ng-model='selectedMaster' ng-options='obj.title for obj in masters'></select>
-		<select ng-model='selectedTrack' ng-options='obj.trackCode for obj in masters[index].specialisation'></select>
+		<select id="select" class="form-control" ng-model='selectedMaster' ng-options='obj.title for obj in masters'></select>
+		<select id="select" class="form-control" ng-model='selectedTrack' ng-options='obj.trackCode for obj in masters[index].specialisation'></select>
 
 		
 		<br/><br/>

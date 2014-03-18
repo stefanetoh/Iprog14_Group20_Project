@@ -1,6 +1,6 @@
 
 /*
-Calle and Anna 2014-03-10: Updates by Johan Bäckman 2014-03-18.
+Calle and Anna 2014-03-10: Updates by Johan Bäckman 2014-03-17.
 
 // TODO: Maybe connect to the model instead, connected to the entire page at the moment
   			Add set- and get-SelectedTrack/Master in model
@@ -17,7 +17,6 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
 	$scope.selectedCourse = "DM1021";
 	$scope.selectedMaster = JSON.parse($routeParams.selectedMaster); // We get the chosen master-object as a string and parses it to a JSON object.
 	$scope.selectedTrack = JSON.parse($routeParams.selectedTrack);
-	//console.log("$scope.selectedMaster: " + $scope.selectedMaster.title + " $scope.selectedTrack: " + $scope.selectedTrack.trackCode);
 	$scope.searchText;
 	
 	
@@ -38,8 +37,6 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
 	        $scope.selectedTrack = $scope.masters[$scope.index].specialisation[0]; //Set the init value to the first element in the list. 
 	        $scope.trackIndex = $scope.masters[$scope.index].specialisation.map(function(d) {return d['trackCode']; }).indexOf($scope.selectedTrack.trackCode);
 
-
-	        //console.log("index " + $scope.index + "trackindex: " + $scope.trackIndex + " $scope.selectedTrack.trackCode: " + $scope.selectedTrack.trackCode);
 	    
 	});	
 	
@@ -53,7 +50,6 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
 	});
 
 
-    //console.log("index är: " + $scope.index + "trackIndex är: " + $scope.trackIndex);
     
     
     // DRAG DROP!!!
@@ -69,7 +65,6 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
 			activeClass: "ui-state-highlight",
 	    	accept: function(dragEl) {
 			    if ($scope.currentPeriod==1) {
-				    //console.log("inne i acceptFunciton");
 				    return true;
 				}
 			}
@@ -79,7 +74,6 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
        	 	activeClass: "ui-state-highlight",
 	    	accept: function(dragEl) {
 		    if ($scope.currentPeriod==2) {
-			    //console.log("inne i acceptFunciton");
 			    return true;
         }
         }
@@ -89,7 +83,6 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
         	activeClass: "ui-state-highlight",
 	    	accept: function(dragEl) {
 		    if ($scope.currentPeriod==3) {
-			    //console.log("inne i acceptFunciton");
 			    return true;
         }
         }
@@ -99,7 +92,6 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
         	activeClass: "ui-state-highlight",
 	    	accept: function(dragEl) {
 		    if ($scope.currentPeriod==4) {
-			    //console.log("inne i acceptFunciton");
 			    return true;
         }
         }
@@ -108,12 +100,15 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
         
    		$scope.startCallback = function(event, ui){
 			$scope.currentPeriod = $(this)[0].course.period; 	//Selects the period of the course being dragged at the moment.	  
-			//console.log("currentCourse: " + $scope.currentCourse.title);
 		}
 		
+		
+		// Johan Bäckman 2013-03-18
 		$scope.completeDrop = function(event, ui){
 			$scope.currentCourse = $(this)[0].course;	
-			console.log("completeDrop: "+ $scope.currentCourse.title);	
+			console.log("completeDrop: "+ $scope.currentCourse.title);	//$(this)[0].course.title);
+																		//Det över funkar, men inte den till vänster. 
+																		 
 			coursesService.add($(this)[0].course);	//TODO: Kan ej användas som objekt		
 													//		fungerar ej med add()
 			

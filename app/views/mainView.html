@@ -23,6 +23,12 @@
 		</div>
 	</div> <!-- /row -->   
 	
+	<script>
+	  $(document).ready(function(){
+	    $("#left").sticky({topSpacing:10});
+	  });
+	</script>
+	
 	<div class="row">
 		<div class="col-md-7" id="left" ng-controller="PeriodController">
 			<div ng-controller="AlertController">
@@ -161,13 +167,14 @@
 				<!-- we populate the drop down with the masters and set the chosen master as init-value -->
 				<!-- index is the index of the master in the masters list. It updates when selectedMaster updates with $scope.$watch (in the controller) -->
 				
-				<p><select ng-init='selectedMaster=masters[{{index}}]'
+				<p><select class="form-control" id="select" ng-init='selectedMaster=masters[{{index}}]'
 						ng-model='selectedMaster'  
 						ng-options='obj.title for obj in masters'>
 				</select>
 				<!-- we populate the drop down with the current tracks. -->
 				<!-- trackIndex is the index of the chosen track in the inner JSON list for the corresponding chosen master -->
-				<select ng-model='selectedTrack' 
+				<select class="form-control" id="select"
+						ng-model='selectedTrack' 
 						ng-init="selectedTrack=masters[{{index}}].specialisation[{{trackIndex}}]"
 						ng-options='obj.trackCode for obj in masters[index].specialisation'>
 				</select></p>
