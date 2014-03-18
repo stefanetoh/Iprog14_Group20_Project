@@ -19,7 +19,6 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
 	$scope.selectedTrack = JSON.parse($routeParams.selectedTrack);
 	//console.log("$scope.selectedMaster: " + $scope.selectedMaster.title + " $scope.selectedTrack: " + $scope.selectedTrack.trackCode);
 	$scope.searchText;
-	$scope.currentCourse;
 	
 	
 	//Get the masters via the service (By Stefan)
@@ -108,9 +107,18 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
         
         
    		$scope.startCallback = function(event, ui){
-			$scope.currentPeriod = $(this)[0].course.period; 	//Selects the period of the course being dragged at the moment.	
-			$scope.currentCourse = $(this)[0].course;			//TODO: Can't find this variable in HTML-page.  	
-			console.log("i startCallBack, håller i: " + $scope.currentCourse.title);
+			$scope.currentPeriod = $(this)[0].course.period; 	//Selects the period of the course being dragged at the moment.	  
+			//console.log("currentCourse: " + $scope.currentCourse.title);
+		}
+		
+		$scope.completeDrop = function(event, ui){
+			$scope.currentCourse = $(this)[0].course;	
+			console.log("completeDrop: "+ $scope.currentCourse.title);	
+			coursesService.add($(this)[0].course);	//TODO: Kan ej användas som objekt		
+													//		fungerar ej med add()
+			
+			
+			
 		}
 
 });

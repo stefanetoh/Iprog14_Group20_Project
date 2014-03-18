@@ -1,7 +1,7 @@
 //Created by Stefan Etoh 2014-03-16. Johan Bäckman 2014-03-17.
 //
 //TODO: add to correct list (p1List...
-//		remove from correct list
+//
 //
 
 app.service('coursesService', function($rootScope){	
