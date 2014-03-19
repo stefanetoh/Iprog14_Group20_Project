@@ -18,6 +18,7 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
 	$scope.selectedMaster = JSON.parse($routeParams.selectedMaster); // We get the chosen master-object as a string and parses it to a JSON object.
 	$scope.selectedTrack = JSON.parse($routeParams.selectedTrack);
 	$scope.searchText;
+	$scope.currentCourse;
 	
 	
 	//Get the masters via the service (By Stefan)
@@ -100,20 +101,14 @@ app.controller('MainController', function($scope, $http, $routeParams, coursesSe
         
    		$scope.startCallback = function(event, ui){
 			$scope.currentPeriod = $(this)[0].course.period; 	//Selects the period of the course being dragged at the moment.	  
+			$scope.currentCourse = $(this)[0].course;
 		}
 		
 		
 		// Johan Bäckman 2013-03-18
-		$scope.completeDrop = function(event, ui){
-			$scope.currentCourse = $(this)[0].course;	
-			console.log("completeDrop: "+ $scope.currentCourse.title);	//$(this)[0].course.title);
-																		//Det över funkar, men inte den till vänster. 
-																		 
-			coursesService.add($(this)[0].course);	//TODO: Kan ej användas som objekt		
-													//		fungerar ej med add()
-			
-			
-			
+		$scope.drop = function(event, ui){
+			console.log("completeDrop: "+ $scope.currentCourse);			
+			coursesService.add($scope.currentCourse);			//TODO: lägger till dubbelt, problemet i mainView?				
 		}
 
 });

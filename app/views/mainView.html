@@ -1,6 +1,6 @@
 <div class="container" id='content' ng-app='MyApp' ng-controller='MainController'>	
 	<!-- By: Calle & Anna 2014-03-04. Johan Bäckman 2014-03-17. -->
-	<!-- TODO: Dragging adds view, but not to p1List -->
+	<!-- TODO: Dragging adds double visually, but only once in list -->
 	<div class="row">
 		<div class="col-md-12" style="background-color:#f9f9f9;">
 			<h3><a id="header" href="index.html">My Academic Year</a></h3>
@@ -23,14 +23,6 @@
 		</div>
 	</div> <!-- /row -->   
 	
-<!--
-	<script>
-	  $(document).ready(function(){
-	    $("#left").sticky({topSpacing:10});
-	  });
-	</script>
-	
--->
 	<div class="row">
 		<span id="fixed">
 			<div class="col-md-7" id="left" ng-controller="PeriodController">
@@ -42,12 +34,8 @@
 					
 				</div>
 				
-				
-	<!-- 			<div ng-controller="SemesterController"> -->
-	<!-- 				<tabset vertical="false" type="navType"> -->
-	<!-- 					<tab heading="Fall semester"> -->
-	<!-- 						<hr /> -->
-							<div class="panel panel-info" id="period1" data-drop="true" ng-model="p1List" jqyoui-droppable="{multiple:true, onDrop: 'completeDrop'}" data-jqyoui-options="acceptP1">
+
+							<div class="panel panel-info" id="period1" data-drop="true" ng-model="p1List" jqyoui-droppable="{multiple:true, onDrop: 'drop'}" data-jqyoui-options="acceptP1">
 								<div class="panel-heading">Period 1</div>
 					
 								<div class="panel-body">
@@ -73,7 +61,7 @@
 							</div> <!-- /panel period1 -->
 							
 					
-							<div class="panel panel-info" id="period2" data-drop="true" ng-model="p2List" jqyoui-droppable="{multiple:true, onDrop: 'completeDrop'}" data-jqyoui-options="acceptP2">
+							<div class="panel panel-info" id="period2" data-drop="true" ng-model="p2List" jqyoui-droppable="{multiple:true, onDrop: 'drop'}" data-jqyoui-options="acceptP2">
 								<div class="panel-heading">Period 2</div>
 								
 								<div class="panel-body">
@@ -97,12 +85,9 @@
 									<p class="text-right">Credits: {{creditsP2}}</p>
 								</div>
 							</div> <!-- /panel period2 -->
-	<!-- 					</tab> <!-- /tab Fall Semester -->
 						
-						
-	<!-- 					<tab heading="Spring semester"> -->
 							
-							<div class="panel panel-info" id="period3" data-drop="true" ng-model="p3List" jqyoui-droppable="{multiple:true, onDrop: 'completeDrop''}" data-jqyoui-options="acceptP3">
+							<div class="panel panel-info" id="period3" data-drop="true" ng-model="p3List" jqyoui-droppable="{multiple:true, onDrop: 'drop''}" data-jqyoui-options="acceptP3">
 								<div class="panel-heading">Period 3</div>
 					
 								<div class="panel-body">
@@ -127,7 +112,7 @@
 								</div>
 							</div> <!-- /panel period3 -->
 				
-							<div class="panel panel-info" id="period4" data-drop="true" ng-model="p4List" jqyoui-droppable="{multiple:true, onDrop: 'completeDrop'}" data-jqyoui-options="acceptP4">
+							<div class="panel panel-info" id="period4" data-drop="true" ng-model="p4List" jqyoui-droppable="{multiple:true, onDrop: 'drop'}" data-jqyoui-options="acceptP4">
 								<div class="panel-heading">Period 4</div>
 					
 								<div class="panel-body">
@@ -152,11 +137,6 @@
 									<p class="text-right">Credits: {{creditsP4}}</p>
 								</div>
 							</div> <!-- /panel period4 -->
-					<!--
-		</tab> <!-- /tab Spring Semester 
-					</tabset>
-	-->
-	<!-- 			</div>	<!-- /div SemesterController --> -
 		
 			</div> <!-- /div PeriodController -->
 		</span> <!-- /span fixed -->
