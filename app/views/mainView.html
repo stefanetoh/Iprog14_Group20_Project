@@ -1,5 +1,5 @@
 <div class="container" id='content' ng-app='MyApp' ng-controller='MainController'>	
-	<!-- By: Calle & Anna 2014-03-04, 2014-03-17. Updates by Johan Bäckman 2014-03-17. -->
+	<!-- By: Calle & Anna 2014-03-20 and Johan Bäckman 2014-03-17. -->
 	<div class="row">
 		<div class="col-md-12" style="background-color:#f9f9f9;">
 			<h3><a id="header" href="index.html">My Academic Year</a></h3>
@@ -28,8 +28,18 @@
 		<!-- PeriodController controls what gets added/deleted from each period via courseServices -->
 		<!-- Listens to "valuesUpdated" in courseServices via $broadcast -->
 		<span id="fixed">
+
+			<!-- Calle & Anna 2014-03-20 -->
+			<!-- ************************************************************* -->
+			<!-- ********************** PERIODS START ************************ -->
+			<!-- ************************************************************* -->
+			
+			<!-- PeriodController controls what gets added/deleted from each period via courseServices -->
+			<!-- Listens to "valuesUpdated" in courseServices via $broadcast -->
 			<div class="col-md-7" id="left" ng-controller="PeriodController">
-	<!-- 				AlertController  -->
+			
+				<!-- AlertController displays an alert when a course is added twice  -->
+
 				<div ng-controller="AlertController">
 					<alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">
 						{{alert.msg}}
@@ -38,7 +48,8 @@
 					
 				</div>
 					
-				<!-- PERIOD 1-->
+				<!-- Makes each period div droppable by using data-drop, jqyoui-droppable and data-jqyoui-options -->
+				<!-- data-jqyoui-options="acceptP1" controls (via DragDropController) if the current draggable has the same period number as the droppable div -->
 				<div 
 					class="panel panel-info" 
 					id="period1" 
@@ -49,8 +60,9 @@
 					<div class="panel-heading">Period 1<span class="pull-right">Credits: {{creditsP1}}</span></div>
 		
 					<div class="panel-body">
-						<div 
-							id="test"	
+					<!-- The div is populated by p1List which contains all the chosen courses in period 1 -->
+						<div 	
+
 							class="periodButton"
 							ng-repeat="course in p1List track by $index" 
 							ng-show="course.title" 
@@ -77,7 +89,7 @@
 					data-jqyoui-options="acceptP2">
 					
 					<div class="panel-heading">Period 2<span class="pull-right">Credits: {{creditsP2}}</span></div>
-					
+					<!-- Same procedure for period 2... -->
 					<div class="panel-body">
 						<div 	
 							class="periodButton"
@@ -105,7 +117,7 @@
 					data-jqyoui-options="acceptP3">
 					
 					<div class="panel-heading">Period 3<span class="pull-right">Credits: {{creditsP3}}</span></div>
-					
+					<!-- Same procedure for period 3... -->
 					<div class="panel-body">
 						<div 	
 							class="periodButton"
@@ -133,7 +145,7 @@
 					data-jqyoui-options="acceptP4">
 					
 					<div class="panel-heading">Period 4<span class="pull-right">Credits: {{creditsP4}}</span></div>
-					
+					<!-- Same procedure for period 4... -->
 					<div class="panel-body">
 						<div 	
 							class="periodButton"
@@ -152,17 +164,27 @@
 					</div>
 				</div> <!-- /panel period4 -->
 			</div> <!-- /div left PeriodController -->
+			
+			<!-- ************************************************************* -->
+			<!-- *********************** PERIODS END ************************* -->
+			<!-- ************************************************************* -->
+			
 		</span>
 
 		<div class="col-md-5" id="right">
 			
-			<!-- By: Calle and Anna 2014-03-10 -->
+			<!-- By: Calle and Anna 2014-03-10, 2014-03-20 -->
+			<!-- Moved CoursesController here to wrap and controll the droplists and the displayed courses -->
 			<div class="col-md-12" id="courses" ng-controller="CoursesController">
+
 				
-				<p><input type='text' class="form-control"ng-model='searchText' placeholder='Search...' /></p>
+				<p><input type='text' class="form-control"ng-model='searchText' placeholder='Search for courses by name, credits, periods etc...' /></p>
+				<!-- ************************************************************* -->
+				<!-- ******************* DROP DOWN LISTS START ******************* -->
+				<!-- ************************************************************* -->
+				
 				<!-- we populate the drop down with the masters and set the chosen master as init-value -->
-				<!-- index is the index of the master in the masters list. It updates when selectedMaster updates with $scope.$watch (in the controller) -->
-				
+				<!-- index is the index of the master in the masters list. It updates when selectedMaster updates with $scope.$watch (in the CoursesController) -->
 				<p><select class="form-control" id="select" ng-init='selectedMaster=masters[{{index}}]'
 						ng-model='selectedMaster'  
 						ng-options='obj.title for obj in masters'>
@@ -174,6 +196,9 @@
 						ng-init="selectedTrack=masters[{{index}}].specialisation[{{trackIndex}}]"
 						ng-options='obj.trackCode for obj in masters[index].specialisation'>
 				</select></p>
+				<!-- *********************************************************** -->
+				<!-- ******************* DROP DOWN LISTS END ******************* -->
+				<!-- *********************************************************** -->
 				
 				<table class="table table-hover" id="coursetable">
 					<thead>
@@ -186,6 +211,13 @@
 						</tr>
 					</thead>
 					<tbody>
+						<!-- ************************************************************* -->
+						<!-- ******************** COURSES ROWS START ********************* -->
+						<!-- ************************************************************* -->
+						
+						<!-- Dynamically get the mandatory courses for the chosen master -->
+						<!-- We make each row a draggable object with data-drag, data-jqyoui-options and jqyoui-draggable -->
+						<!-- When you start dragging a course startCallback is called in the DragDropController -->
 						<tr 
 							id="mandatory" 
 							ng-repeat="course in listMandatory | filter:searchText" 
@@ -203,6 +235,8 @@
 			        		<td>{{course.period}}</td>
 							<td><input type="button" class="btn btn-default" value="Add" ng-click="addCourse(course)" /></td>
 			        	</tr>
+						
+						<!-- Dynamically get the courses in the track for the chosen track that are not mandatory -->
 						<tr 
 							id="trackCourse" 
 							ng-repeat="course in listTracks | filter:searchText" 
@@ -218,11 +252,14 @@
 			        		<td><input type="button" class="btn btn-default" value="Add" ng-click="addCourse(course)" /></td>
 			        	</tr>
 					</tbody>
+					<!-- ************************************************************* -->
+					<!-- ******************** COURSES ROWS END *********************** -->
+					<!-- ************************************************************* -->
 	
 				</table>    	
 			</div>	<!-- /courses -->
-		</div>	<!-- /right  -->
-	</div><!-- /row DragDropController -->
+		</div>	<!-- /right -->
+	</div><!-- /row  /DragDropController -->
 </div>	<!-- /container-->
 
 

@@ -8,7 +8,9 @@
 		
 		<p>Choose your master: </p>
 		
+		<!-- Selects the title of each master -->
 		<select id="select" class="form-control" ng-model='selectedMaster' ng-options='obj.title for obj in masters'></select>
+		<!-- Selects the track codes that are included in the chosen master -->
 		<select id="select" class="form-control" ng-model='selectedTrack' ng-options='obj.trackCode for obj in masters[index].specialisation'></select>
 
 		
