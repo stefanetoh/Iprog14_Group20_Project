@@ -71,8 +71,16 @@
 							ng-model="p1List" 
 							jqyoui-draggable="{index: {{$index}},animate:true}">
 							
-							<button type="button"  class="btn btn-default" popover="Credits {{course.credits}} <strong>URL</strong>">
-								{{course.title}}
+							<button type="button" 
+									class="btn btn-default" 
+									tooltip-html-unsafe="
+										<div class='text-left'>
+										<p><strong>Code:</strong> {{course.code}}</p>
+										<p><strong>Credits:</strong> {{course.credits}}</p>
+										<p><strong>Level:</strong> {{course.level}}</p>
+										</div>
+										">								
+							{{course.title}}
 								<span class="glyphicon glyphicon-remove" ng-click="removeCourse(course)"></span> 
 							</button>
 						</div>
@@ -100,8 +108,16 @@
 							ng-model="p2List" 
 							jqyoui-draggable="{index: {{$index}},animate:true}">
 								
-							<button type="button" class="btn btn-default" popover="{{course.credits}}">
-								{{course.title}}
+							<button type="button" 
+									class="btn btn-default" 
+									tooltip-html-unsafe="
+										<div class='text-left'>
+										<p><strong>Code:</strong> {{course.code}}</p>
+										<p><strong>Credits:</strong> {{course.credits}}</p>
+										<p><strong>Level:</strong> {{course.level}}</p>
+										</div>
+										">								
+							{{course.title}}
 								<span class="glyphicon glyphicon-remove" ng-click="removeCourse(course)"></span> 
 							</button>
 						</div>
@@ -128,8 +144,16 @@
 							ng-model="p3List" 
 							jqyoui-draggable="{index: {{$index}},animate:true}">
 								
-							<button type="button" class="btn btn-default"popover="{{course.credits}}">
-								{{course.title}}
+							<button type="button" 
+									class="btn btn-default" 
+									tooltip-html-unsafe="
+										<div class='text-left'>
+										<p><strong>Code:</strong> {{course.code}}</p>
+										<p><strong>Credits:</strong> {{course.credits}}</p>
+										<p><strong>Level:</strong> {{course.level}}</p>
+										</div>
+										">								
+							{{course.title}}
 								<span class="glyphicon glyphicon-remove" ng-click="removeCourse(course)"></span> 
 							</button>
 						</div>
@@ -156,8 +180,16 @@
 							ng-model="p4List" 
 							jqyoui-draggable="{index: {{$index}},animate:true}">
 								
-							<button type="button" class="btn btn-default"popover="{{course.credits}}">
-								{{course.title}}
+							<button type="button" 
+									class="btn btn-default" 
+									tooltip-html-unsafe="
+										<div class='text-left'>
+										<p><strong>Code:</strong> {{course.code}}</p>
+										<p><strong>Credits:</strong> {{course.credits}}</p>
+										<p><strong>Level:</strong> {{course.level}}</p>
+										</div>
+										">								
+							{{course.title}}
 								<span class="glyphicon glyphicon-remove" ng-click="removeCourse(course)"></span> 
 							</button>
 						</div>
