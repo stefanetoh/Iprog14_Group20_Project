@@ -1,9 +1,15 @@
+.periodButton{
+	display: inline;
+	margin: 2px;
+}
+
 .fixed{
 	position: fixed;
 	top: 0px;
 	padding-left:0;
 	padding-right: 0;
 }
+
 
 .ui-state-highlight{
 	background: #a1e19b;
@@ -41,15 +47,6 @@
 	margin-left: -3em;
 }
 
-.period{
-	overflow: scroll;
-	border-width: 0.2em;
-	border-color: black;
-	border-style: solid;
-	padding: 0.4em;
-	margin-right: 1em;
-	height: 100px;
-}
 
 
 #info{
@@ -90,6 +87,7 @@ body{
 }
 
 #right {
+
 	background-color: #f9f9f9;
 	border-width: 0px;
 	border-color: #ddd;
@@ -98,6 +96,11 @@ body{
 	margin-top:1em;
 	margin-bottom:10em;
 	float:right;
+}
+
+#TEST{
+	overflow: scroll;
+	height: 500px;
 }
 
 #select{

@@ -137,6 +137,7 @@ function createCourseObject($course_code, $start_term, $round_id){
 	$course_title = $xml_course->title[1]; // 1-> english
 	$course_credits = $xml_course->credits[1];
 	$course_level = $xml_course->educationalLevel[1];
+	$course_url = $xml_course->supplementalInformationUrl[1];
 
 	//one last link to get the PERIOD
 	$url_course_round = 'http://www.kth.se/api/kopps/v1/course/' . $course_code . '/round/' . $year . ':' . $term . '/' . $round_id;
@@ -144,7 +145,7 @@ function createCourseObject($course_code, $start_term, $round_id){
 	$course_period = $xml_course_round->creditDistribution[0]->periodCredits[0]["period"];
 	
 	//create course-object
-	$course = array("code" => "$course_code" , "title" => "$course_title", "credits" => "$course_credits", "level" => "$course_level", "period" => "$course_period");
+	$course = array("code" => "$course_code" , "title" => "$course_title", "credits" => "$course_credits", "level" => "$course_level", "period" => "$course_period", "url" => "$course_url");
 	
 	return $course;	
 	

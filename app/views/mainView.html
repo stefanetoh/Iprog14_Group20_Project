@@ -24,12 +24,12 @@
 		</div>
 	</div> <!-- /row -->   
 	
-	<div class="row" ng-controller="DragDropController">
+	<div class="row" id="row" ng-controller="DragDropController">
+		<!-- PeriodController controls what gets added/deleted from each period via courseServices -->
+		<!-- Listens to "valuesUpdated" in courseServices via $broadcast -->
 		<span id="fixed">
-			<!-- PeriodController controls what gets added/deleted from each period via courseServices -->
-			<!-- Listens to "valuesUpdated" in courseServices via $broadcast -->
 			<div class="col-md-7" id="left" ng-controller="PeriodController">
-<!-- 				AlertController  -->
+	<!-- 				AlertController  -->
 				<div ng-controller="AlertController">
 					<alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">
 						{{alert.msg}}
@@ -38,116 +38,126 @@
 					
 				</div>
 					
-							<div class="panel panel-info" id="period1" data-drop="true" jqyoui-droppable="{multiple:true, onDrop: 'drop'}" data-jqyoui-options="acceptP1">
-								<div class="panel-heading">Period 1</div>
+				<!-- PERIOD 1-->
+				<div 
+					class="panel panel-info" 
+					id="period1" 
+					data-drop="true" 
+					jqyoui-droppable="{multiple:true, onDrop: 'drop'}" 
+					data-jqyoui-options="acceptP1">
 					
-								<div class="panel-body">
-						     	   	<table class="table">
-										<tr 
-										ng-repeat="course in p1List track by $index" 
-										ng-show="course.title" 
-										data-drag="true" 
-										data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" 
-										ng-model="p1List" 
-										jqyoui-draggable="{index: {{$index}},animate:true}">				        			
-											<td>{{course.title}}</td>
-						        			<td>{{course.credits}}</td>
-						        			<td>{{course.level}}</td>
-						        			<td><input type="Button" class="btn btn-danger" value="Delete" ng-click="removeCourse(course)" /></td>
-						        		</tr>
-						        	</table>
-								</div>
-					        	
-								<div class="panel-footer">
-									<p class="text-right">Credits: {{creditsP1}}</p>
-								</div>
-							</div> <!-- /panel period1 -->
-							
-					
-							<div class="panel panel-info" id="period2" data-drop="true" jqyoui-droppable="{multiple:true, onDrop: 'drop'}" data-jqyoui-options="acceptP2">
-								<div class="panel-heading">Period 2</div>
+					<div class="panel-heading">Period 1<span class="pull-right">Credits: {{creditsP1}}</span></div>
+		
+					<div class="panel-body">
+						<div 	
+							class="periodButton"
+							ng-repeat="course in p1List track by $index" 
+							ng-show="course.title" 
+							data-drag="true" 
+							data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" 
+							ng-model="p1List" 
+							jqyoui-draggable="{index: {{$index}},animate:true}">
 								
-								<div class="panel-body">
-									<table class="table">
-										<tr 
-										ng-repeat="course in p2List track by $index" 
-										ng-show="course.title" 
-										data-drag="true" 
-										data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" 
-										ng-model="p2List" 
-										jqyoui-draggable="{index: {{$index}},animate:true}">
-											<td>{{course.title}}</td>
-						        			<td>{{course.credits}}</td>
-						        			<td>{{course.level}}</td>
-						        			<td><input type="Button" class="btn btn-danger" value="Delete" ng-click="removeCourse(course)" /></td>
-						        		</tr>
-						        	</table>
-								</div>
-					        	
-								<div class="panel-footer">
-									<p class="text-right">Credits: {{creditsP2}}</p>
-								</div>
-							</div> <!-- /panel period2 -->
-						
+							<button type="button" class="btn btn-default" onclick="test(course)">
+								{{course.title}}
+								<span class="glyphicon glyphicon-remove" ng-click="removeCourse(course)"></span> 
+							</button>
+						</div>
+					</div>
+				</div> <!-- /panel period1 -->
 							
-							<div class="panel panel-info" id="period3" data-drop="true" jqyoui-droppable="{multiple:true, onDrop: 'drop''}" data-jqyoui-options="acceptP3">
-								<div class="panel-heading">Period 3</div>
+
+				<!-- PERIOD 2-->
+				<div 
+					class="panel panel-info" 
+					id="period2" 
+					data-drop="true" 
+					jqyoui-droppable="{multiple:true, onDrop: 'drop'}" 
+					data-jqyoui-options="acceptP2">
 					
-								<div class="panel-body">
-									<table class="table">
-										<tr 
-										ng-repeat="course in p3List track by $index" 
-										ng-show="course.title" 
-										data-drag="true" 
-										data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" 
-										ng-model="p3List" 
-										jqyoui-draggable="{index: {{$index}},animate:true}">							
-											<td>{{course.title}}</td>
-											<td>{{course.credits}}</td>
-											<td>{{course.level}}</td>
-											<td><input type="Button" class="btn btn-danger"value="Delete" ng-click="removeCourse(course)" /></td>
-										</tr>
-									</table>
-								</div>
-		
-								<div class="panel-footer">
-									<p class="text-right">Credits: {{creditsP3}}</p>
-								</div>
-							</div> <!-- /panel period3 -->
-				
-							<div class="panel panel-info" id="period4" data-drop="true" jqyoui-droppable="{multiple:true, onDrop: 'drop'}" data-jqyoui-options="acceptP4">
-								<div class="panel-heading">Period 4</div>
+					<div class="panel-heading">Period 2<span class="pull-right">Credits: {{creditsP2}}</span></div>
 					
-								<div class="panel-body">
-									<table class="table">
-										<tr 
-										ng-repeat="course in p4List track by $index" 
-										ng-show="course.title" 
-										data-drag="true" 
-										data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" 
-										ng-model="p4List" 
-										jqyoui-draggable="{index: {{$index}},animate:true}">
-										
-											<td>{{course.title}}</td>
-											<td>{{course.credits}}</td>
-											<td>{{course.level}}</td>
-											<td><input type="Button" class="btn btn-danger" value="Delete" ng-click="removeCourse(course)" /></td>
-										</tr>
-									</table>
-								</div>
-		
-								<div class="panel-footer">
-									<p class="text-right">Credits: {{creditsP4}}</p>
-								</div>
-							</div> <!-- /panel period4 -->
-		
-			</div> <!-- /div PeriodController -->
-		</span> <!-- /span fixed -->
+					<div class="panel-body">
+						<div 	
+							class="periodButton"
+							ng-repeat="course in p2List track by $index" 
+							ng-show="course.title" 
+							data-drag="true" 
+							data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" 
+							ng-model="p2List" 
+							jqyoui-draggable="{index: {{$index}},animate:true}">
+								
+							<button type="button" class="btn btn-default"popover="{{course.credits}}">
+								{{course.title}}
+								<span class="glyphicon glyphicon-remove" ng-click="removeCourse(course)"></span> 
+							</button>
+						</div>
+					</div>
+				</div> <!-- /panel period2 -->
+					
+				<!-- PERIOD 3-->			
+				<div 
+					class="panel panel-info" 
+					id="period3" 
+					data-drop="true" 
+					jqyoui-droppable="{multiple:true, onDrop: 'drop'}" 
+					data-jqyoui-options="acceptP3">
+					
+					<div class="panel-heading">Period 3<span class="pull-right">Credits: {{creditsP3}}</span></div>
+					
+					<div class="panel-body">
+						<div 	
+							class="periodButton"
+							ng-repeat="course in p3List track by $index" 
+							ng-show="course.title" 
+							data-drag="true" 
+							data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" 
+							ng-model="p3List" 
+							jqyoui-draggable="{index: {{$index}},animate:true}">
+								
+							<button type="button" class="btn btn-default"popover="{{course.credits}}">
+								{{course.title}}
+								<span class="glyphicon glyphicon-remove" ng-click="removeCourse(course)"></span> 
+							</button>
+						</div>
+					</div>
+				</div> <!-- /panel period3 -->
+	
+				<!-- PERIOD 4-->
+				<div 
+					class="panel panel-info" 
+					id="period4" 
+					data-drop="true" 
+					jqyoui-droppable="{multiple:true, onDrop: 'drop'}" 
+					data-jqyoui-options="acceptP4">
+					
+					<div class="panel-heading">Period 4<span class="pull-right">Credits: {{creditsP4}}</span></div>
+					
+					<div class="panel-body">
+						<div 	
+							class="periodButton"
+							ng-repeat="course in p4List track by $index" 
+							ng-show="course.title" 
+							data-drag="true" 
+							data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" 
+							ng-model="p4List" 
+							jqyoui-draggable="{index: {{$index}},animate:true}">
+								
+							<button type="button" class="btn btn-default"popover="{{course.credits}}">
+								{{course.title}}
+								<span class="glyphicon glyphicon-remove" ng-click="removeCourse(course)"></span> 
+							</button>
+						</div>
+					</div>
+				</div> <!-- /panel period4 -->
+			</div> <!-- /div left PeriodController -->
+		</span>
+
 		<div class="col-md-5" id="right">
 			
 			<!-- By: Calle and Anna 2014-03-10 -->
 			<div class="col-md-12" id="courses" ng-controller="CoursesController">
-			
+				
 				<p><input type='text' class="form-control"ng-model='searchText' placeholder='Search...' /></p>
 				<!-- we populate the drop down with the masters and set the chosen master as init-value -->
 				<!-- index is the index of the master in the masters list. It updates when selectedMaster updates with $scope.$watch (in the controller) -->
@@ -176,28 +186,31 @@
 					</thead>
 					<tbody>
 						<tr 
-						id="mandatory" 
-						ng-repeat="course in listMandatory | filter:searchText" 
-						ng-show="course.title" 
-						data-drag="true" 
-						data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" 
-						ng-model="listMandatory" 
-						jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep', onStart: 'startCallback'}">
-			        		<td><span class="glyphicon glyphicon-info-sign" tooltip="Mandatory"> </span> {{course.title}}</td>
+							id="mandatory" 
+							ng-repeat="course in listMandatory | filter:searchText" 
+							ng-show="course.title" 
+							data-drag="true" 
+							data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" 
+							ng-model="listMandatory" 
+							jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep', onStart: 'startCallback'}">
+			        		<td>
+			        			<span class="glyphicon glyphicon-info-sign" tooltip="Mandatory"></span> 
+			        			<a href="{{course.url}}" target="_blank">{{course.title}}</a>
+			        		</td>
 			        		<td>{{course.credits}}</td>
 			        		<td>{{course.level}}</td>
 			        		<td>{{course.period}}</td>
 							<td><input type="button" class="btn btn-default" value="Add" ng-click="addCourse(course)" /></td>
 			        	</tr>
 						<tr 
-						id="trackCourse" 
-						ng-repeat="course in listTracks | filter:searchText" 
-						ng-show="course.title" 
-						data-drag="true" 
-						data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" 
-						ng-model="listTracks" 
-						jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep', onStart: 'startCallback'}">	        		
-							<td>{{course.title}}</td>
+							id="trackCourse" 
+							ng-repeat="course in listTracks | filter:searchText" 
+							ng-show="course.title" 
+							data-drag="true" 
+							data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" 
+							ng-model="listTracks" 
+							jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep', onStart: 'startCallback'}">	        		
+							<td><a href="{{course.url}}" target="_blank">{{course.title}}</a></td>
 			        		<td>{{course.credits}}</td>
 			        		<td>{{course.level}}</td>
 			        		<td>{{course.period}}</td>
@@ -207,8 +220,8 @@
 	
 				</table>    	
 			</div>	<!-- /courses -->
-		</div>	<!-- /right -->
-	</div><!-- /row -->
+		</div>	<!-- /right  -->
+	</div><!-- /row DragDropController -->
 </div>	<!-- /container-->
 
 
