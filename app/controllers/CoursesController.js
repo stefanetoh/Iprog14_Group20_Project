@@ -3,14 +3,16 @@
 //TODO: 
 //
 
-app.controller('CoursesController', function($scope, $routeParams, coursesService){		
+app.controller('CoursesController', function($scope, coursesService){		
 		
-	$scope.inputValue = "";
-	$scope.selectedCourse = "DM1021";
-	$scope.selectedMaster = JSON.parse($routeParams.selectedMaster); // We get the chosen master-object as a string and parses it to a JSON object.
-	$scope.selectedTrack = JSON.parse($routeParams.selectedTrack);
-	$scope.searchText;
+
+	//$scope.selectedMaster = JSON.parse($routeParams.selectedMaster); // We get the chosen master-object as a string and parses it to a JSON object.
+	//$scope.selectedTrack = JSON.parse($routeParams.selectedTrack);
 	
+	$scope.selectedMaster = coursesService.getSelectedMaster();
+	$scope.selectedTrack = coursesService.getSelectedTrack();
+	
+	console.log($scope.selectedMaster);
 	
 	//Get the masters via the service (By Stefan)
 	$scope.masters = coursesService.getMasters();
@@ -51,7 +53,6 @@ app.controller('CoursesController', function($scope, $routeParams, coursesServic
 		$scope.listTracks = $scope.selectedTrack.trackCourses;
 		
 		
-		//TODO Create new controller for the periods and paste this content.
 		
 		
 	$scope.addCourse = function(course) {

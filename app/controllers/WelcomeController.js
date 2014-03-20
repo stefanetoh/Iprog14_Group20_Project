@@ -38,6 +38,13 @@ app.controller('WelcomeController', function($scope, $http, coursesService) {
 		
 	});
 
+	$scope.setMaster = function(selectedMaster) {
+		coursesService.setSelectedMaster(selectedMaster);
+    }		
+    
+    $scope.setTrack = function(selectedTrack){
+	    coursesService.setSelectedTrack(selectedTrack);
+    }	
 
 
 });

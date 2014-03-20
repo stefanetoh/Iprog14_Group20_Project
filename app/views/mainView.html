@@ -49,7 +49,8 @@
 					<div class="panel-heading">Period 1<span class="pull-right">Credits: {{creditsP1}}</span></div>
 		
 					<div class="panel-body">
-						<div 	
+						<div 
+							id="test"	
 							class="periodButton"
 							ng-repeat="course in p1List track by $index" 
 							ng-show="course.title" 
@@ -57,8 +58,8 @@
 							data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" 
 							ng-model="p1List" 
 							jqyoui-draggable="{index: {{$index}},animate:true}">
-								
-							<button type="button" class="btn btn-default" onclick="test(course)">
+							
+							<button type="button"  class="btn btn-default" popover="Credits {{course.credits}} <strong>URL</strong>">
 								{{course.title}}
 								<span class="glyphicon glyphicon-remove" ng-click="removeCourse(course)"></span> 
 							</button>
@@ -66,7 +67,7 @@
 					</div>
 				</div> <!-- /panel period1 -->
 							
-
+				
 				<!-- PERIOD 2-->
 				<div 
 					class="panel panel-info" 
@@ -87,7 +88,7 @@
 							ng-model="p2List" 
 							jqyoui-draggable="{index: {{$index}},animate:true}">
 								
-							<button type="button" class="btn btn-default"popover="{{course.credits}}">
+							<button type="button" class="btn btn-default" popover="{{course.credits}}">
 								{{course.title}}
 								<span class="glyphicon glyphicon-remove" ng-click="removeCourse(course)"></span> 
 							</button>
@@ -223,5 +224,6 @@
 		</div>	<!-- /right  -->
 	</div><!-- /row DragDropController -->
 </div>	<!-- /container-->
+
 
 

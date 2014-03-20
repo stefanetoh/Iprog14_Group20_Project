@@ -19,6 +19,9 @@ app.service('coursesService', function($rootScope){
 	var p2List = [];
 	var p3List = [];
 	var p4List = [];
+	
+	var selectedMaster="";
+	var selectedTrack="";
     
     //return json object from the getMasters.php file
 	this.getMasters = function(){
@@ -40,6 +43,13 @@ app.service('coursesService', function($rootScope){
 	    return masters;	
 	}
 	
+ 	this.setSelectedMaster = function (master){
+	 	selectedMaster = master;
+ 	}
+ 	
+ 	this.setSelectedTrack = function (track){
+	 	selectedTrack = track;
+ 	}
  	
  	//add courses to corresponding list above
     this.add = function (course) {

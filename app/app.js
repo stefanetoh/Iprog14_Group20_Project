@@ -13,7 +13,7 @@ var app = angular.module('MyApp', [
 
 app.config(function($routeProvider) {
 		$routeProvider.
-		when('/Master/:selectedMaster/Track/:selectedTrack', {
+		when('/MainView/', {
 			templateUrl: 'app/views/mainView.html',
 			controller: 'MainController'
 		}).
