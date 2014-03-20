@@ -15,7 +15,7 @@ app.config(function($routeProvider) {
 		$routeProvider.
 		when('/MainView/', {
 			templateUrl: 'app/views/mainView.html',
-			controller: 'MainController'
+			controller: 'DragDropController'
 		}).
 		when('/welcome', {
 			templateUrl: 'app/views/welcomeView.html',
