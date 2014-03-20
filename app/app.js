@@ -6,8 +6,8 @@ var app = angular.module('MyApp', [
 
 /*
 	By: Anna and Calle 2014-03-10
-	This provides routing between different views. 
-	We assign controllers to each view as well.
+	This provides routing between different html-views. 
+	We assign controllers to each view in each html file as well.
 
 */
 
