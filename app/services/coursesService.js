@@ -20,6 +20,7 @@ app.service('coursesService', function($rootScope){
 	var p3List = [];
 	var p4List = [];
     
+    //return json object from the getMasters.php file
 	this.getMasters = function(){
 		var url = "app/scripts/getMasters.php";
 		
@@ -40,6 +41,7 @@ app.service('coursesService', function($rootScope){
 	}
 	
  	
+ 	//add courses to corresponding list above
     this.add = function (course) {
     	var courseAdded = this.checkIfCourseAdded(course);
     	var period = course.period;
@@ -89,6 +91,7 @@ app.service('coursesService', function($rootScope){
     	}
 	}
 	
+	//if course is added it shouldn't be added again
 	this.checkIfCourseAdded = function (course){
 		var courseAdded = false;
 		
@@ -101,6 +104,7 @@ app.service('coursesService', function($rootScope){
 		courseAdded = false;
 	}
 
+	//removes courses
     this.remove = function (course) {   
 
     	var courseCredits = parseFloat(course.credits);
@@ -150,6 +154,7 @@ app.service('coursesService', function($rootScope){
     }	
 	
 
+	//GET-methods below
 	this.getTotalCredits = function(){
         return totalCredits;
     }
