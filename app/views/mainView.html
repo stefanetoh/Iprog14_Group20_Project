@@ -1,11 +1,11 @@
 <div class="container" id='content' ng-app='MyApp' ng-controller='MainController'>	
-	<!-- By: Calle & Anna 2014-03-04. Johan Bäckman 2014-03-17. -->
-	<!-- TODO: Dragging adds double visually, but only once in list -->
+	<!-- By: Calle & Anna 2014-03-04, 2014-03-17. Updates by Johan Bäckman 2014-03-17. -->
 	<div class="row">
 		<div class="col-md-12" style="background-color:#f9f9f9;">
 			<h3><a id="header" href="index.html">My Academic Year</a></h3>
 		</div>
-	
+		<!-- Displays the credits that is added by drag and drop and/or by the add button -->
+		<!-- Has its own controller -->
 		<div class="col-md-12" id="creditsOverview">
 			<div class="col-md-12" ng-controller="CreditsMenuController">
 				<ul id="summary">
@@ -14,7 +14,8 @@
 				</ul>
 			</div>
 			
-			
+			<!-- Displays the progress bar based on the total credits chosen -->
+			<!-- Has its own controller -->
 			<div class="col-md-12" ng-controller="ProgressBarController">
 				<progressbar max="max" value="totalCredits">
 					<span style="color:black; white-space:nowrap;">{{totalCredits}} / {{max}}</span>
@@ -23,9 +24,12 @@
 		</div>
 	</div> <!-- /row -->   
 	
-	<div class="row">
+	<div class="row" ng-controller="DragDropController">
 		<span id="fixed">
+			<!-- PeriodController controls what gets added/deleted from each period via courseServices -->
+			<!-- Listens to "valuesUpdated" in courseServices via $broadcast -->
 			<div class="col-md-7" id="left" ng-controller="PeriodController">
+<!-- 				AlertController  -->
 				<div ng-controller="AlertController">
 					<alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">
 						{{alert.msg}}
@@ -33,9 +37,8 @@
 					</alert>
 					
 				</div>
-				
-
-							<div class="panel panel-info" id="period1" data-drop="true" ng-model="p1List" jqyoui-droppable="{multiple:true, onDrop: 'drop'}" data-jqyoui-options="acceptP1">
+					
+							<div class="panel panel-info" id="period1" data-drop="true" jqyoui-droppable="{multiple:true, onDrop: 'drop'}" data-jqyoui-options="acceptP1">
 								<div class="panel-heading">Period 1</div>
 					
 								<div class="panel-body">
@@ -61,7 +64,7 @@
 							</div> <!-- /panel period1 -->
 							
 					
-							<div class="panel panel-info" id="period2" data-drop="true" ng-model="p2List" jqyoui-droppable="{multiple:true, onDrop: 'drop'}" data-jqyoui-options="acceptP2">
+							<div class="panel panel-info" id="period2" data-drop="true" jqyoui-droppable="{multiple:true, onDrop: 'drop'}" data-jqyoui-options="acceptP2">
 								<div class="panel-heading">Period 2</div>
 								
 								<div class="panel-body">
@@ -87,7 +90,7 @@
 							</div> <!-- /panel period2 -->
 						
 							
-							<div class="panel panel-info" id="period3" data-drop="true" ng-model="p3List" jqyoui-droppable="{multiple:true, onDrop: 'drop''}" data-jqyoui-options="acceptP3">
+							<div class="panel panel-info" id="period3" data-drop="true" jqyoui-droppable="{multiple:true, onDrop: 'drop''}" data-jqyoui-options="acceptP3">
 								<div class="panel-heading">Period 3</div>
 					
 								<div class="panel-body">
@@ -112,7 +115,7 @@
 								</div>
 							</div> <!-- /panel period3 -->
 				
-							<div class="panel panel-info" id="period4" data-drop="true" ng-model="p4List" jqyoui-droppable="{multiple:true, onDrop: 'drop'}" data-jqyoui-options="acceptP4">
+							<div class="panel panel-info" id="period4" data-drop="true" jqyoui-droppable="{multiple:true, onDrop: 'drop'}" data-jqyoui-options="acceptP4">
 								<div class="panel-heading">Period 4</div>
 					
 								<div class="panel-body">
@@ -143,7 +146,7 @@
 		<div class="col-md-5" id="right">
 			
 			<!-- By: Calle and Anna 2014-03-10 -->
-			<div class="col-md-12" id="courses">
+			<div class="col-md-12" id="courses" ng-controller="CoursesController">
 			
 				<p><input type='text' class="form-control"ng-model='searchText' placeholder='Search...' /></p>
 				<!-- we populate the drop down with the masters and set the chosen master as init-value -->
@@ -161,7 +164,7 @@
 						ng-options='obj.trackCode for obj in masters[index].specialisation'>
 				</select></p>
 				
-				<table class="table table-hover" ng-controller="CoursesController" id="coursetable">
+				<table class="table table-hover" id="coursetable">
 					<thead>
 						<tr>
 							<th>Course name</th>
