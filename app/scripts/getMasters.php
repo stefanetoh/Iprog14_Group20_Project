@@ -145,7 +145,7 @@ function createCourseObject($course_code, $start_term, $round_id){
 	$course_period = $xml_course_round->creditDistribution[0]->periodCredits[0]["period"];
 	
 	//create course-object
-	$course = array("code" => "$course_code" , "title" => "$course_title", "credits" => "$course_credits", "level" => "$course_level", "period" => "$course_period", "url" => $course_url);
+	$course = array("code" => "$course_code" , "title" => "$course_title", "credits" => "$course_credits", "level" => "$course_level", "period" => "$course_period", "url" => "$course_url");
 	
 	return $course;	
 	
